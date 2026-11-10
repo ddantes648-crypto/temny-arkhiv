@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7063045413487849" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d0c0e">
+<meta name="description" content="Онлайн-чат Тёмного архива для зарегистрированных участников.">
+<meta name="robots" content="noindex,follow">
+<title>Онлайн-чат — Тёмный архив</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="index.css">
+<style>
+.chat-shell{max-width:900px;margin:0 auto;padding:28px 0 55px}
+.chat-panel{border:1px solid #a18b68;background:#f7efda;color:#2a231a;padding:clamp(14px,3vw,26px)}
+.chat-panel h2,.chat-panel label{color:#2a231a}
+.chat-log{height:min(58vh,620px);min-height:280px;overflow:auto;padding:14px;background:#fffaf0;border:2px solid #8c7458;margin:16px 0;display:flex;flex-direction:column;gap:12px;color:#1f1912}
+.chat-message{padding:12px 15px;background:#ffffff;border:1px solid #b9a483;border-left:5px solid #8c7458;border-radius:6px;max-width:min(95%,760px);align-self:flex-start;overflow-wrap:anywhere;color:#1f1912;box-shadow:0 2px 6px #3b2a1622}
+.chat-message.mine{align-self:flex-end;background:#f6dcd2;border-color:#c98f80;border-left-color:#8d1d1d;color:#1f1912}
+.chat-message.sending{opacity:.65}
+.chat-message-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:.9rem}
+.chat-message-head strong{color:#7b1b1b;font-size:1rem}
+.chat-message-head time{color:#5a4b3a}
+.chat-message-body{margin:6px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;color:#1f1912;font-size:1.05rem}
+.chat-delete{padding:3px 7px;font-size:.8rem;margin-left:8px;color:#2a231a}
+.chat-compose label{display:block;margin-bottom:8px;font-weight:bold}
+.chat-compose textarea{display:block;width:100%;min-height:110px;resize:vertical;box-sizing:border-box;background:#ffffff;color:#1f1912;-webkit-text-fill-color:#1f1912;caret-color:#8d1d1d;border:2px solid #8c7458;padding:14px;font:inherit;font-size:1.05rem;line-height:1.6;border-radius:5px}
+.chat-compose textarea::placeholder{color:#7a6b58;-webkit-text-fill-color:#7a6b58}
+.chat-compose textarea:focus{outline:3px solid #8d1d1d;outline-offset:1px}
+.chat-count{margin:4px 0 0;font-size:.85rem;color:#5a4b3a;text-align:right}
+.chat-emojis{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chat-emojis button{padding:5px 9px;background:#fff8e8;border:1px solid #9a8664;color:#2a231a}
+.chat-status{min-height:1.5em;color:#4d3a28}
+.chat-auth{padding:14px;border:1px solid #a18b68;background:#fff4dc;color:#2a231a}
+.chat-log .hint{color:#4d3a28}
+@media(max-width:600px){.chat-shell{padding-top:16px}.chat-log{height:55vh;min-height:240px;padding:9px}.chat-message{max-width:100%;padding:10px 11px}.chat-message-head{font-size:.82rem}.chat-compose textarea{min-height:100px}}
+</style>
+</head>
+<body>
+<header class="masthead"><div class="wrap"><div class="kicker">Общение участников · тайны и свидетельства</div><div class="brand-lockup"><img class="brand-mark" src="favicon.png" alt="" width="72" height="72"><div><h1>ТЁМНЫЙ АРХИВ</h1></div></div><p class="tagline">Онлайн-чат зарегистрированных читателей.</p></div></header>
+<nav class="site-nav" aria-label="Основная навигация"><div class="wrap nav-inner"><a href="index.html">Архив историй</a><a href="stories.html">Прислать историю</a><a href="forum.html">Форум</a><a href="chat.html" aria-current="page">Онлайн-чат</a><a href="articles.html">Авторские статьи</a><a href="videos.html">Видео</a><a href="about.html">О проекте</a><a href="rules.html">Правила</a><a href="privacy.html">Конфиденциальность</a><a href="contact.html">Контакты</a></div></nav>
+<main class="wrap chat-shell"><section class="community-intro"><h2>Онлайн-чат Тёмного архива</h2><p>Общайся с другими участниками в реальном времени. Пожалуйста, соблюдай <a href="rules.html">правила сайта</a>. Не публикуй личные данные.</p></section>
+<section class="chat-panel"><div id="chatAuth" class="chat-auth">Проверяем вход…</div><div id="chatApp" hidden><div class="toolbar"><h2>Общий чат</h2><button id="chatRefresh" class="secondary" type="button">Обновить</button></div><div id="chatLog" class="chat-log" role="log" aria-live="polite" aria-label="Сообщения чата"><p class="hint">Загружаем сообщения…</p></div><form id="chatForm" class="chat-compose"><label for="chatText">Сообщение (до 1000 символов)</label><textarea id="chatText" maxlength="1000" required placeholder="Напиши сообщение…"></textarea><p class="chat-count" id="chatCount">0 / 1000</p><div class="chat-emojis" aria-label="Добавить смайлик"><button type="button" data-emoji="😀">😀</button><button type="button" data-emoji="😱">😱</button><button type="button" data-emoji="👻">👻</button><button type="button" data-emoji="🕯️">🕯️</button><button type="button" data-emoji="🖤">🖤</button><button type="button" data-emoji="🌑">🌑</button><button type="button" data-emoji="💀">💀</button><button type="button" data-emoji="😂">😂</button></div><button id="chatSend" type="submit">Отправить сообщение</button><p id="chatStatus" class="chat-status" role="status"></p></form></div></section></main>
+<footer><div class="wrap footer-grid"><div><p><strong>ТЁМНЫЙ АРХИВ</strong></p><p>Общение читателей и мистический литературный архив.</p><p>© Тёмный архив</p></div><div class="footer-links"><a href="rules.html">Правила</a><a href="privacy.html">Конфиденциальность</a><a href="contact.html">Контакты</a></div></div></footer>
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const supabase=createClient('https://eohxtowuwsxppejltrbp.supabase.co','sb_publishable_5spYU-MQBUdO1Z_3A9HfMA_y3HpuSEP');
+const $=id=>document.getElementById(id);let user=null,isAdmin=false,channel=null,loading=false,again=false;
+const el=(tag,text,cls)=>{const n=document.createElement(tag);n.textContent=text??'';if(cls)n.className=cls;return n;};
+const fmt=d=>new Date(d).toLocaleString('ru-RU');
+function showAuth(){$('chatAuth').replaceChildren();const p=el('p','Чтобы читать и отправлять сообщения, войди или зарегистрируйся на сайте.');const a=el('a','Перейти ко входу');a.href='stories.html';$('chatAuth').append(p,a);$('chatAuth').hidden=false;$('chatApp').hidden=true;}
+function buildMessage(m,pending){
+  const item=el('article','','chat-message'+(m.user_id===user.id?' mine':'')+(pending?' sending':''));
+  const head=el('div','','chat-message-head');
+  head.append(el('strong',m.author_name||'Участник'),el('time',pending?'отправляется…':fmt(m.created_at)));
+  if(isAdmin&&!pending){const del=el('button','Удалить','secondary chat-delete');del.type='button';
+    del.addEventListener('click',async()=>{if(!confirm('Удалить это сообщение?'))return;del.disabled=true;
+      const {error}=await supabase.from('chat_messages').delete().eq('id',m.id);
+      if(error){$('chatStatus').textContent='Не удалось удалить сообщение.';del.disabled=false;console.error(error);}else await loadMessages();});
+    head.append(del);}
+  item.append(head,el('p',m.content,'chat-message-body'));
+  return item;
+}
+async function loadMessages(){
+  if(!user)return;
+  if(loading){again=true;return;}
+  loading=true;
+  const log=$('chatLog');
+  if(!log.children.length)log.append(el('p','Загружаем сообщения…','hint'));
+  const {data,error}=await supabase.from('chat_messages').select('id,user_id,author_name,content,created_at').order('created_at',{ascending:false}).limit(150);
+  loading=false;
+  if(error){log.replaceChildren(el('p','Не удалось загрузить чат. Администратору нужно выполнить файл 05_setup_chat.sql в Supabase → SQL Editor.','hint'));console.error(error);return;}
+  const nearBottom=log.scrollHeight-log.scrollTop-log.clientHeight<80;
+  const items=[...(data||[])].reverse().map(m=>buildMessage(m,false));
+  if(!items.length)items.push(el('p','Пока сообщений нет. Начни разговор первым!','hint'));
+  log.replaceChildren(...items);
+  if(nearBottom||!log.dataset.init){log.scrollTop=log.scrollHeight;log.dataset.init='1';}
+  if(again){again=false;loadMessages();}
+}
+async function init(){
+  const {data,error}=await supabase.auth.getSession();
+  if(error||!data.session?.user){showAuth();return;}
+  user=data.session.user;$('chatAuth').hidden=true;$('chatApp').hidden=false;
+  const role=await supabase.from('story_admins').select('user_id').eq('user_id',user.id).maybeSingle();
+  isAdmin=!!role.data;
+  await loadMessages();
+  channel=supabase.channel('dark-archive-chat').on('postgres_changes',{event:'*',schema:'public',table:'chat_messages'},()=>loadMessages()).subscribe();
+}
+async function sendMessage(){
+  if(!user)return;
+  const content=$('chatText').value.trim();if(!content)return;
+  const button=$('chatSend');button.disabled=true;$('chatStatus').textContent='Отправляем…';
+  const author=(user.email||'Участник').split('@')[0].slice(0,60);
+  // Сообщение сразу показываем в ленте, пока оно уходит на сервер.
+  const log=$('chatLog');log.querySelectorAll('.hint').forEach(n=>n.remove());
+  const temp=buildMessage({user_id:user.id,author_name:author,content,created_at:new Date().toISOString()},true);
+  log.append(temp);log.scrollTop=log.scrollHeight;
+  const {error}=await supabase.from('chat_messages').insert({user_id:user.id,author_name:author,content});
+  button.disabled=false;
+  if(error){temp.remove();$('chatStatus').textContent='Не удалось отправить сообщение. Текст сохранён в поле — попробуй ещё раз.';console.error(error);return;}
+  $('chatText').value='';updateCount();
+  $('chatStatus').textContent='Сообщение отправлено.';
+  await loadMessages();log.scrollTop=log.scrollHeight;
+}
+function updateCount(){$('chatCount').textContent=$('chatText').value.length+' / 1000';}
+$('chatForm').addEventListener('submit',e=>{e.preventDefault();sendMessage();});
+$('chatText').addEventListener('input',updateCount);
+$('chatText').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();sendMessage();}});
+document.querySelectorAll('[data-emoji]').forEach(b=>b.addEventListener('click',()=>{const ta=$('chatText');const start=ta.selectionStart??ta.value.length,end=ta.selectionEnd??ta.value.length;ta.value=ta.value.slice(0,start)+b.dataset.emoji+ta.value.slice(end);ta.focus();ta.selectionStart=ta.selectionEnd=start+b.dataset.emoji.length;updateCount();}));
+$('chatRefresh').addEventListener('click',loadMessages);
+supabase.auth.onAuthStateChange((_event,session)=>{if(!session?.user){user=null;if(channel)supabase.removeChannel(channel);showAuth();}});
+await init();
+</script>
+</body></html>

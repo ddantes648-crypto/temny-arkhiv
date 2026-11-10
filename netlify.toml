@@ -1,0 +1,27 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Правила для красивых ссылок на истории
+[[redirects]]
+  from = "/stories/*"
+  to = "/.netlify/functions/content-page?type=story&slug=:splat"
+  status = 200
+  force = true
+
+# Правила для красивых ссылок на статьи
+[[redirects]]
+  from = "/articles/*"
+  to = "/.netlify/functions/content-page?type=article&slug=:splat"
+  status = 200
+  force = true
+
+# /sitemap.xml всегда собирается функцией из базы данных
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/.netlify/functions/sitemap"
+  status = 200
+  force = true

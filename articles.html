@@ -1,0 +1,393 @@
+<!doctype html><html lang="ru"><head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7063045413487849" crossorigin="anonymous"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#efe3c6"><meta name="robots" content="index,follow"><meta name="description" content="Уникальные авторские статьи Сергея Тёмного о мистических событиях, исторических публикациях и загадочных материалах."><link rel="icon" href="favicon.png"><link rel="stylesheet" href="index.css"><title>Уникальные авторские статьи — Тёмный архив</title>
+<style>
+  /* Стили для поиска */
+  .story-search {
+    display: flex;
+    gap: 10px;
+    max-width: 1000px;
+    margin: 14px auto 22px;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .story-search input {
+    box-sizing: border-box;
+    flex: 1;
+    min-width: 0;
+    padding: 14px 16px;
+    color: #e8d2ae;
+    background: #171310;
+    border: 1px solid #B52A2B;
+    font: inherit;
+    border-radius: 3px;
+  }
+  .story-search input:focus {
+    outline: 2px solid #B52A2B;
+    outline-offset: 2px;
+  }
+  .story-search button {
+    padding: 10px 14px;
+    color: #f0d6ac;
+    background: #211d18;
+    border: 1px solid #B52A2B;
+    cursor: pointer;
+    font: inherit;
+    border-radius: 3px;
+  }
+  .story-search button:hover { background: #38201f; }
+  @media(max-width:480px) {
+    .story-search { flex-wrap: wrap; padding: 0 12px; }
+    .story-search button { width: 100%; }
+  }
+
+  /* Эффектный стиль для кнопок пагинации статей */
+  #articlesPagination {
+    margin: 50px 0 30px;
+    gap: 12px;
+  }
+  
+  #articlesPagination button {
+    min-width: 50px;
+    height: 50px;
+    padding: 0 16px;
+    color: #f0e4ca;
+    background: #2b251e;
+    border: 1px solid #5c4b36;
+    border-radius: 5px;
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #articlesPagination button:hover:not(:disabled):not(.active) {
+    background: #8d1d1d;
+    border-color: #d45a5a;
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(141, 29, 29, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+  }
+  
+  #articlesPagination button:active:not(:disabled):not(.active) {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(141, 29, 29, 0.4);
+  }
+  
+  #articlesPagination button.active {
+    background: #991f20;
+    border-color: #e14b51;
+    color: #fff;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(153, 31, 32, 0.4);
+    cursor: default;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  
+  #articlesPagination button:disabled {
+    background: #1a1512;
+    border-color: #3a2e24;
+    color: #5c4b36;
+    box-shadow: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  #articlesPagination .pagination-info {
+    color: #7a6b58;
+    font-size: 0.95rem;
+    margin-top: 25px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  /* Стили для кнопок "Назад" и "Вперёд" */
+  #articlesPagination button.prev-btn,
+  #articlesPagination button.next-btn {
+    padding: 0 22px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    background: #221c17;
+    border-color: #8c7458;
+  }
+  #articlesPagination button.prev-btn:hover:not(:disabled),
+  #articlesPagination button.next-btn:hover:not(:disabled) {
+    background: #8d1d1d;
+    border-color: #e14b51;
+  }
+</style>
+</head><body><header class="masthead"><div class="wrap"><div class="kicker">Архив необъяснимого · коллекция старых материалов</div><div class="brand-lockup"><img class="brand-mark" src="favicon.png" alt="" width="72" height="72"><div><h1>ТЁМНЫЙ АРХИВ</h1></div></div><p class="tagline">Истории, которые трудно объяснить. События, которые невозможно забыть.</p></div></header>
+<nav class="site-nav" aria-label="Основная навигация">
+  <div class="wrap nav-inner">
+    <a href="index.html">Архив историй</a>
+    <a href="stories.html">Прислать историю</a>
+    <a href="forum.html">Форум</a>
+    <a href="articles.html" aria-current="page">Авторские статьи</a>
+    <a href="videos.html">Видео</a>
+    <a href="about.html">О проекте</a>
+    <a href="rules.html">Правила</a>
+    <a href="privacy.html">Конфиденциальность</a>
+    <a href="contact.html">Контакты</a>
+  </div>
+</nav>
+
+<div class="story-search">
+  <input id="articleSearch" type="search" placeholder="Поиск по названию и тексту статей…" autocomplete="off" aria-label="Поиск по статьям">
+  <button id="clearArticleSearch" type="button" hidden>Очистить</button>
+</div>
+
+<main class="wrap">
+  <section class="archive-page-intro">
+    <h2>Уникальные авторские статьи</h2>
+    <p>В этом разделе публикуются статьи, написанные мной, автором проекта, под псевдонимом <strong>Сергей Тёмный</strong>. Все материалы являются моими оригинальными произведениями и защищены авторским правом.</p>
+  </section>
+  <div id="contentList"><p>Загружаем материалы…</p></div>
+</main>
+
+<footer><div class="wrap footer-grid"><div><p><strong>ТЁМНЫЙ АРХИВ</strong></p><p>Архив мистики, авторских статей и загадочных историй.</p><p>© Тёмный архив</p></div><div class="footer-links"><a href="about.html">О проекте</a><a href="rules.html">Правила</a><a href="privacy.html">Конфиденциальность</a><a href="contact.html">Контакты</a></div></div></footer>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const db = createClient(
+  'https://eohxtowuwsxppejltrbp.supabase.co',
+  'sb_publishable_5spYU-MQBUdO1Z_3A9HfMA_y3HpuSEP'
+);
+const target = document.getElementById('contentList');
+const searchInput = document.getElementById('articleSearch');
+const clearSearchBtn = document.getElementById('clearArticleSearch');
+
+const PAGE_SIZE = 10;
+let allArticles = [];
+let filteredArticles = [];
+let currentPage = 1;
+
+function showMessage(message) {
+  target.replaceChildren();
+  const p = document.createElement('p');
+  p.textContent = message;
+  target.append(p);
+}
+
+function normalizeSearch(value) {
+  return String(value || '')
+    .toLocaleLowerCase('ru-RU')
+    .replace(/ё/g, 'е')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+}
+
+function applySearch() {
+  const query = normalizeSearch(searchInput ? searchInput.value : '');
+  const terms = query.split(/\s+/).filter(Boolean);
+
+  filteredArticles = allArticles.filter(article => {
+    const searchableText = normalizeSearch([
+      article.title,
+      article.content,
+      article.source,
+      article.tags
+    ].join(' '));
+
+    return terms.every(term => searchableText.includes(term));
+  });
+
+  currentPage = 1;
+  if (clearSearchBtn) clearSearchBtn.hidden = !query;
+
+  if (filteredArticles.length === 0) {
+    const existingNav = document.getElementById('articlesPagination');
+    if (existingNav) existingNav.remove();
+    showMessage(query ? 'По вашему запросу ничего не найдено.' : 'Статей пока нет.');
+    return;
+  }
+
+  renderPage(1);
+}
+
+// Функция отрисовки пагинации
+function renderPagination(totalPages) {
+  const existingNav = document.getElementById('articlesPagination');
+  if (existingNav) existingNav.remove();
+
+  if (totalPages <= 1) return;
+
+  const nav = document.createElement('nav');
+  nav.id = 'articlesPagination';
+  nav.className = 'pagination';
+  nav.setAttribute('aria-label', 'Страницы статей');
+
+  const prev = document.createElement('button');
+  prev.type = 'button';
+  prev.className = 'prev-btn';
+  prev.innerHTML = '⟵ Назад';
+  prev.disabled = currentPage === 1;
+  prev.addEventListener('click', () => {
+    if (currentPage > 1) renderPage(currentPage - 1);
+  });
+  nav.appendChild(prev);
+
+  let pages = [];
+  if (totalPages <= 7) {
+    pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  } else {
+    pages = [1];
+    if (currentPage > 3) pages.push('…');
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(totalPages - 1, currentPage + 1);
+    for (let i = start; i <= end; i++) pages.push(i);
+    if (currentPage < totalPages - 2) pages.push('…');
+    pages.push(totalPages);
+  }
+
+  pages.forEach(p => {
+    if (p === '…') {
+      const span = document.createElement('span');
+      span.textContent = '…';
+      span.setAttribute('aria-hidden', 'true');
+      span.style.color = '#7a6b58';
+      span.style.fontWeight = 'bold';
+      nav.appendChild(span);
+      return;
+    }
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = p;
+    if (p === currentPage) {
+      btn.className = 'active';
+      btn.setAttribute('aria-current', 'page');
+    }
+    btn.addEventListener('click', () => {
+      if (currentPage !== p) renderPage(p);
+    });
+    nav.appendChild(btn);
+  });
+
+  const next = document.createElement('button');
+  next.type = 'button';
+  next.className = 'next-btn';
+  next.innerHTML = 'Вперёд ⟶';
+  next.disabled = currentPage === totalPages;
+  next.addEventListener('click', () => {
+    if (currentPage < totalPages) renderPage(currentPage + 1);
+  });
+  nav.appendChild(next);
+
+  const info = document.createElement('div');
+  info.className = 'pagination-info';
+  info.textContent = `Страница ${currentPage} из ${totalPages} · Найдено статей: ${filteredArticles.length}`;
+  nav.appendChild(info);
+
+  target.after(nav);
+}
+
+// Функция отрисовки статей для текущей страницы
+function renderPage(page) {
+  currentPage = page;
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
+  const pageItems = filteredArticles.slice(start, end);
+
+  const cards = pageItems.map(article => {
+    const card = document.createElement('article');
+    card.className = 'archive-content-card';
+
+    if (article.image_url) {
+      const image = document.createElement('img');
+      image.src = article.image_url;
+      image.alt = 'Иллюстрация к статье: ' + (article.title || 'Без названия');
+      image.loading = 'lazy';
+      image.className = 'story-image';
+      card.append(image);
+    }
+
+    const heading = document.createElement('h2');
+    const link = document.createElement('a');
+    link.textContent = article.title || 'Без названия';
+    const slug = article.slug || ('newspaper-' + String(article.id).slice(0, 8));
+    link.href = '/.netlify/functions/content-page?type=article&slug=' + encodeURIComponent(slug);
+    heading.append(link);
+    card.append(heading);
+
+    if (article.source) {
+      const source = document.createElement('p');
+      source.className = 'archive-source';
+      source.textContent = article.source;
+      card.append(source);
+    }
+
+    // Очищаем HTML-теги для превью
+    const content = String(article.content || '')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+      
+    const preview = document.createElement('p');
+    preview.textContent = content.slice(0, 260) + (content.length > 260 ? '…' : '');
+    card.append(preview);
+
+    const author = document.createElement('p');
+    author.textContent = 'Автор: Сергей Тёмный';
+    author.style.fontWeight = 'bold';
+    author.style.marginTop = '10px';
+    card.append(author);
+
+    const read = document.createElement('a');
+    read.href = link.href;
+    read.className = 'video-open-link';
+    read.textContent = 'Читать статью полностью →';
+    card.append(read);
+    return card;
+  });
+
+  target.replaceChildren(...cards);
+  
+  const totalPages = Math.ceil(filteredArticles.length / PAGE_SIZE);
+  renderPagination(totalPages);
+
+  if (page !== 1 || target.getBoundingClientRect().top < 0) {
+      window.scrollTo({ top: target.offsetTop - 40, behavior: 'smooth' });
+  }
+}
+
+// Поиск
+if (searchInput) {
+  searchInput.addEventListener('input', applySearch);
+}
+if (clearSearchBtn && searchInput) {
+  clearSearchBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    applySearch();
+    searchInput.focus();
+  });
+}
+
+// Загрузка данных
+try {
+  const { data, error } = await db
+    .from('archive_articles')
+    .select('id,title,source,image_url,content,created_at,slug,tags,meta_description')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Ошибка загрузки авторских статей:', error);
+    showMessage('Не удалось загрузить статьи. Проверь, что SQL-настройка SEO выполнена в Supabase.');
+  } else if (!data || data.length === 0) {
+    showMessage('Статей пока нет. Добавь статью через админку.');
+  } else {
+    allArticles = data;
+    filteredArticles = allArticles;
+    renderPage(1);
+  }
+} catch (error) {
+  console.error('Неожиданная ошибка загрузки статей:', error);
+  showMessage('Возникла ошибка при загрузке статей. Обнови страницу чуть позже.');
+}
+</script></body></html>

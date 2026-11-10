@@ -1,0 +1,1034 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta name="google-site-verification" content="-hbyBnKh8V8_r-ifAIu4WfPY9lNT8dYwQ5icJK58oqs" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7063045413487849" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d0c0e">
+<meta name="robots" content="index,follow">
+<meta name="description" content="Тёмный архив — мистические истории, страшные рассказы читателей, городские легенды и необъяснимые события.">
+<title>Тёмный архив — мистические истории и рассказы читателей</title>
+<link rel="stylesheet" href="index.css">
+
+<style>
+.community{max-width:1000px;margin:0 auto;padding:34px 20px 60px}
+.community-intro{padding:28px;margin-bottom:28px;background:var(--panel,#211d18);border:1px solid var(--line,#504235)}
+.community-intro h2{margin-top:0;font-size:clamp(26px,4vw,40px)}
+.community-intro p{line-height:1.7}
+
+.reader-story{margin-bottom:14px;background:#f5e8cf;border:1px solid #a88d68;color:#33291f;border-radius:3px;overflow:hidden;box-shadow:0 2px 5px #503b2110}
+.story-summary{display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none;padding:14px 16px;color:#33291f;position:relative}
+.story-summary::-webkit-details-marker{display:none}
+.story-summary::after{content:'＋';color:#8d2927;font-size:22px;line-height:1;flex:0 0 auto;margin-left:4px}
+.reader-story[open] .story-summary::after{content:'−'}
+.story-summary-copy{flex:1;min-width:0;display:block}
+.story-summary h3{margin:3px 0 6px;font-size:19px;line-height:1.3;color:#2e241b;overflow-wrap:anywhere}
+.story-meta{color:#66533f;font-size:13px;line-height:1.45;margin:0}
+.story-preview{margin:6px 0 0;line-height:1.45;color:#594733;font-size:14px;white-space:normal;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.story-thumb{display:block;width:88px;height:68px;flex:0 0 88px;object-fit:cover;border:1px solid #8d7656;background:#e6d4b4;padding:2px}
+.story-thumb-placeholder{display:grid;place-items:center;width:88px;height:68px;flex:0 0 88px;background:#e6d4b4;border:1px solid #8d7656;color:#8d2927;font-size:25px}
+.story-full{padding:0 18px 20px 116px;color:#33291f;background:#f8edd9;border-top:1px solid #d4c0a0}
+
+/* Обновленные стили для контента с HTML-тегами */
+.story-content{line-height:1.85;overflow-wrap:anywhere;margin-top:14px;color:#33291f}
+.story-content h2 { font-size:1.5rem; margin-top:1.5em; margin-bottom:0.5em; color:#2c2118; border-bottom:1px solid #d4c0a0; padding-bottom:0.2em; }
+.story-content h3 { font-size:1.25rem; margin-top:1.2em; margin-bottom:0.5em; color:#3a2a1e; }
+.story-content p { margin: 0 0 1em; line-height: 1.7; }
+.story-content ul, .story-content ol { margin: 0 0 1em 1.5em; padding:0; }
+.story-content li { margin-bottom: 0.3em; }
+.story-content blockquote { margin: 1em 0; padding: 0.5em 1em; border-left: 3px solid #8d2927; background: #efe3c6; color: #4a3c2b; font-style: italic; }
+
+.story-category{color:#8d2927;text-transform:uppercase;letter-spacing:1px;font-size:11px;font-weight:bold}
+.stories-message{padding:22px;border:1px solid var(--line,#504235);line-height:1.7}
+
+.submit-story-link,.comment-submit{
+  display:inline-block;margin-top:12px;padding:13px 20px;
+  background:#991f20;color:#fff;border:0;text-decoration:none;
+  cursor:pointer;font:inherit
+}
+.submit-story-link:hover,.comment-submit:hover{background:#b52a2b}
+
+.comments{border-top:1px solid var(--line,#504235);margin-top:24px;padding-top:18px}
+.comments h4{font-size:21px;margin:0 0 16px}
+.comment-item{padding:14px 16px;margin:12px 0;border:1px solid var(--line,#504235);background:rgba(0,0,0,.12)}
+.comment-item p{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;margin-bottom:0}
+.comment-meta{color:#c6a987;font-size:13px}
+.comment-form{margin-top:18px}
+.comment-form label{display:block;margin:12px 0 6px}
+.comment-form input,.comment-form textarea{
+  box-sizing:border-box;display:block;width:100%;padding:12px;
+  color:inherit;background:#171310;border:1px solid var(--line,#504235);font:inherit
+}
+.comment-form textarea{min-height:100px;resize:vertical}
+.comment-status{line-height:1.6;margin-top:10px}
+.comment-login-note{color:#d9c5a8;line-height:1.6}
+.comment-login-note a{color:#f0d6ac}
+
+/* Изображение занимает всю ширину карточки */
+.story-image{
+  display:block;
+  width:100%;
+  max-width:100%;
+  max-height:none;
+  height:auto;
+  object-fit:contain;
+  margin:20px 0;
+  border-radius:4px;
+  box-sizing:border-box
+}
+
+/* Поиск по названию и содержимому историй */
+.story-search{
+  display:flex;
+  gap:10px;
+  max-width:1000px;
+  margin:14px auto 22px;
+  padding:0 20px;
+  box-sizing:border-box;
+}
+.story-search input{
+  box-sizing:border-box;
+  flex:1;
+  min-width:0;
+  padding:14px 16px;
+  color:#e8d2ae;
+  background:#171310;
+  border:1px solid #B52A2B;
+  font:inherit;
+}
+.story-search input:focus{
+  outline:2px solid #B52A2B;
+  outline-offset:2px;
+}
+.story-search button{
+  padding:10px 14px;
+  color:#f0d6ac;
+  background:#211d18;
+  border:1px solid #B52A2B;
+  cursor:pointer;
+  font:inherit;
+}
+.story-search button:hover{background:#38201f}
+@media(max-width:480px){
+  .story-search{flex-wrap:wrap;padding:0 12px}
+  .story-search button{width:100%}
+}
+
+/* Навигация между страницами */
+.pagination{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:30px 0 10px
+}
+.pagination button{
+  min-width:42px;
+  min-height:42px;
+  padding:9px 13px;
+  color:#f0d6ac;
+  background:#211d18;
+  border:1px solid var(--line,#504235);
+  font:inherit;
+  cursor:pointer
+}
+.pagination button:hover:not(:disabled){
+  background:#38291f;
+  border-color:#c6a987
+}
+.pagination button.active{
+  background:#991f20;
+  border-color:#991f20;
+  color:#fff;
+  font-weight:bold
+}
+.pagination button:disabled{
+  opacity:.4;
+  cursor:not-allowed
+}
+.pagination-info{
+  width:100%;
+  text-align:center;
+  color:#c6a987;
+  font-size:14px;
+  margin-top:8px
+}
+
+
+/* Лайки к историям */
+.story-likes{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin:20px 0 8px;padding-top:16px;
+  border-top:1px solid var(--line,#504235)
+}
+.story-like-button{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 15px;background:#211d18;color:#f0d6ac;
+  border:1px solid #70403d;border-radius:3px;cursor:pointer;font:inherit
+}
+.story-like-button:hover{background:#38201f;border-color:#b52a2b}
+.story-like-button[aria-pressed="true"]{background:#4a1d20;border-color:#d45a5a;color:#ffb0a9}
+.story-like-button:disabled{opacity:.55;cursor:wait}
+.story-like-count{color:#c6a987;font-size:14px}
+.story-like-note{color:#c6a987;font-size:13px;line-height:1.5}
+
+[hidden]{display:none!important}
+
+@media(max-width:600px){
+  .community{padding:20px 12px 40px}
+  .community-intro{padding:20px}
+  .story-summary{padding:11px;gap:9px}
+  .story-summary h3{font-size:16px}
+  .story-thumb,.story-thumb-placeholder{width:68px;height:60px;flex-basis:68px}
+  .story-full{padding:0 12px 16px}
+  .pagination{gap:5px}
+  .pagination button{min-width:36px;padding:8px}
+}
+</style>
+</head>
+
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="kicker">Архив необъяснимого · истории читателей</div>
+    <div class="brand-lockup">
+      <img class="brand-mark" src="favicon.png" alt="" width="72" height="72">
+      <div>
+        <h1>ТЁМНЫЙ АРХИВ</h1>
+      </div>
+    </div>
+    <p class="tagline">Истории, которые трудно объяснить. События, которые невозможно забыть.</p>
+  </div>
+</header>
+
+<nav class="site-nav" aria-label="Основная навигация">
+  <div class="wrap nav-inner">
+    <a href="index.html">Архив историй</a>
+    <a href="stories.html">Прислать историю</a>
+    <a href="forum.html">Форум</a>
+    <a href="articles.html">Авторские статьи</a>
+    <a href="videos.html">Видео</a>
+    <a href="about.html">О проекте</a>
+    <a href="rules.html">Правила</a>
+    <a href="privacy.html">Конфиденциальность</a>
+    <a href="contact.html">Контакты</a>
+    </div>
+</nav>
+
+<div class="story-search">
+  <input
+    id="storySearch"
+    type="search"
+    placeholder="Поиск по названию и тексту историй…"
+    autocomplete="off"
+    aria-label="Поиск по историям"
+  >
+  <button id="clearStorySearch" type="button" hidden>
+    Очистить
+  </button>
+</div>
+
+<section class="featured-wrap wrap" aria-label="Популярные истории">
+  <div class="featured-heading"><span>Из архива</span><h2>Пять историй, которые стоит прочитать</h2></div>
+  <div class="featured-card" id="featuredCard" aria-live="polite"><div class="featured-number">01 / 05</div><p>Загружаем истории…</p></div>
+  <div class="featured-controls"><button type="button" id="featuredPrev" aria-label="Предыдущая история">← Назад</button><span id="featuredPosition">1 / 5</span><button type="button" id="featuredNext" aria-label="Следующая история">Вперёд →</button></div>
+</section>
+
+<main class="community">
+  <section class="community-intro">
+    <h2>Расскажи, что произошло на самом деле...</h2>
+    <p>Здесь собраны страшные истории из жизни, рассказы очевидцев и случаи, которым трудно найти объяснение. Каждая история публикуется после проверки модератором.</p>
+    <p>Все уникальные авторские истории на этом сайте написаны мной под псевдонимом <strong>СЕРГЕЙ ТЁМНЫЙ</strong>. Я являюсь автором этих произведений, и они защищены авторским правом.</p>
+    <p>Ты тоже можешь поделиться своим опытом. Зарегистрируйся, отправь рассказ и дождись решения редактора.</p>
+    <a class="submit-story-link" href="stories.html">Прислать свою историю</a>
+  </section>
+
+  <section id="readerStories">
+    <h2>Истории читателей</h2>
+    <p id="storiesMessage" class="stories-message">Загружаем истории архива…</p>
+    <div id="readerStoryList"></div>
+    <nav id="pagination" class="pagination" aria-label="Страницы историй" hidden></nav>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <p><strong>ТЁМНЫЙ АРХИВ</strong></p>
+      <p>Мистический литературный архив: авторские рассказы, истории читателей и необъяснимые события.</p>
+      <p class="smallprint">Пользовательские материалы публикуются после модерации. Художественные рассказы могут быть вымышленными.</p>
+      <p>© Тёмный архив</p>
+    </div>
+    <div>
+      <p><strong>Информация</strong></p>
+      <div class="footer-links">
+        <a href="about.html">О проекте</a>
+        <a href="rules.html">Правила публикации</a>
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="contact.html">Контакты</a>
+        <a href="stories.html">Отправить историю</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const supabase = createClient(
+  'https://eohxtowuwsxppejltrbp.supabase.co',
+  'sb_publishable_5spYU-MQBUdO1Z_3A9HfMA_y3HpuSEP'
+);
+
+// Умный рендеринг: если текста без тегов, он сам разобьет его на абзацы
+function sanitizeHtml(html) {
+  if (!html) return '';
+  let text = String(html);
+
+  // Если текст не содержит HTML-тегов абзацев, значит это обычный текст с переносами строк
+  if (!/<(p|div|h[1-6]|ul|ol|blockquote)[^>]*>/i.test(text)) {
+    text = text
+      .split(/\n{2,}/)
+      .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+      .join('');
+  }
+
+  // Экранируем HTML для безопасности
+  let escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  
+  // Разрешаем только безопасные теги
+  const allowedTags = ['h2', 'h3', 'h4', 'p', 'br', 'b', 'strong', 'i', 'em', 'u', 'ul', 'ol', 'li', 'blockquote'];
+  allowedTags.forEach(tag => {
+    const openRegex = new RegExp(`&lt;${tag}&gt;`, 'gi');
+    const closeRegex = new RegExp(`&lt;/${tag}&gt;`, 'gi');
+    escaped = escaped.replace(openRegex, `<${tag}>`).replace(closeRegex, `</${tag}>`);
+  });
+  
+  escaped = escaped.replace(/&lt;br\s*\/?&gt;/gi, '<br>');
+  
+  // Убираем лишние переносы строк, чтобы они не создавали пустоты
+  escaped = escaped.replace(/\n/g, ' ');
+
+  return escaped;
+}
+
+// Записываем просмотры главной страницы и страницы отправки историй в общую статистику.
+async function recordPageVisit() {
+  const page = location.pathname.split('/').pop() || 'index.html';
+  if (!['index.html', 'stories.html'].includes(page)) return;
+  const { error } = await supabase.from('site_visits').insert({ page });
+  if (error) console.error('Не удалось записать посещение:', error);
+}
+recordPageVisit();
+
+const list = document.getElementById('readerStoryList');
+const message = document.getElementById('storiesMessage');
+const pagination = document.getElementById('pagination');
+
+const PAGE_SIZE = 10;
+let allStories = [];
+let filteredStories = [];
+let currentPage = 1;
+let currentUser = null;
+let renderVersion = 0;
+let storyLikeCounts = new Map();
+let userLikedStoryIds = new Set();
+
+// Карусель пяти последних одобренных историй
+let featuredStories = [];
+let featuredIndex = 0;
+function renderFeatured() {
+  const card = document.getElementById('featuredCard');
+  const position = document.getElementById('featuredPosition');
+  if (!card || !position) return;
+  if (!featuredStories.length) {
+    card.replaceChildren();
+    const p = document.createElement('p'); p.textContent = 'Пока нет опубликованных историй.'; card.appendChild(p);
+    position.textContent = '0 / 0'; return;
+  }
+  const story = featuredStories[featuredIndex];
+  card.replaceChildren();
+  const number = document.createElement('div'); number.className = 'featured-number'; number.textContent = String(featuredIndex + 1).padStart(2,'0') + ' / ' + String(featuredStories.length).padStart(2,'0');
+  const category = document.createElement('p'); category.className = 'featured-category'; category.textContent = story.category || 'Страшная история';
+  const title = document.createElement('h3'); title.textContent = story.title || 'Без названия';
+  const author = document.createElement('p'); author.textContent = 'Автор: Сергей Тёмный'; author.style.fontWeight = 'bold'; author.style.fontSize = '0.9em';
+  
+  // Очищаем текст от HTML тегов для превью
+  const cleanContent = String(story.content || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  const excerpt = document.createElement('p'); excerpt.className = 'featured-excerpt'; excerpt.textContent = cleanContent.slice(0, 260) + (cleanContent.length > 260 ? '…' : '');
+  
+  const link = document.createElement('a'); link.href = '#readerStories'; link.className = 'featured-read'; link.textContent = 'Читать в архиве ↓';
+  link.addEventListener('click', () => { const target = document.getElementById('storySearch'); if (target) { target.value = story.title || ''; applySearch(); } });
+  card.append(number, category, title, author, excerpt, link);
+  position.textContent = (featuredIndex + 1) + ' / ' + featuredStories.length;
+}
+const featuredPrev = document.getElementById('featuredPrev');
+const featuredNext = document.getElementById('featuredNext');
+if (featuredPrev) featuredPrev.addEventListener('click', () => { if (featuredStories.length) { featuredIndex = (featuredIndex - 1 + featuredStories.length) % featuredStories.length; renderFeatured(); } });
+if (featuredNext) featuredNext.addEventListener('click', () => { if (featuredStories.length) { featuredIndex = (featuredIndex + 1) % featuredStories.length; renderFeatured(); } });
+
+const searchInput = document.getElementById('storySearch');
+const clearSearchButton = document.getElementById('clearStorySearch');
+
+function normalizeSearch(value) {
+  return String(value || '')
+    .toLocaleLowerCase('ru-RU')
+    .replace(/ё/g, 'е')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+}
+
+function applySearch() {
+  const query = normalizeSearch(searchInput ? searchInput.value : '');
+  const terms = query.split(/\s+/).filter(Boolean);
+
+  filteredStories = allStories.filter(story => {
+    const searchableText = normalizeSearch([
+      story.title,
+      story.content,
+      story.category,
+      story.author_name
+    ].join(' '));
+
+    return terms.every(term => searchableText.includes(term));
+  });
+
+  currentPage = 1;
+  if (clearSearchButton) clearSearchButton.hidden = !query;
+
+  if (filteredStories.length === 0) {
+    renderVersion++; // Cancel any older asynchronous render.
+    list.replaceChildren();
+    pagination.hidden = true;
+    message.hidden = false;
+    message.textContent = query
+      ? 'По вашему запросу ничего не найдено. Попробуйте другие слова.'
+      : 'Пока нет опубликованных историй.';
+    return;
+  }
+
+  message.hidden = true;
+  renderPage();
+}
+
+function textElement(tag, text, className) {
+  const element = document.createElement(tag);
+  element.textContent = text ?? '';
+  if (className) element.className = className;
+  return element;
+}
+
+function formatDate(value) {
+  if (!value) return '';
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? '' : date.toLocaleString('ru-RU');
+}
+
+/* Загрузка комментариев к конкретной истории */
+async function loadComments(storyId, commentsBox, statusBox) {
+  commentsBox.replaceChildren();
+  statusBox.textContent = '';
+
+  const { data, error } = await supabase
+    .from('story_comments')
+    .select('id,story_id,user_id,author_name,content,created_at')
+    .eq('story_id', storyId)
+    .order('created_at', { ascending: true });
+
+  if (error) {
+    statusBox.textContent =
+      'Не удалось загрузить комментарии. Проверьте политики доступа таблицы story_comments в Supabase.';
+    console.error('Comment loading error:', error);
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    commentsBox.appendChild(
+      textElement('p', 'Пока нет комментариев. Будь первым.')
+    );
+    return;
+  }
+
+  for (const comment of data) {
+    const item = document.createElement('article');
+    item.className = 'comment-item';
+
+    item.appendChild(textElement(
+      'div',
+      `${comment.author_name || 'Читатель'}${comment.created_at ? ' · ' + formatDate(comment.created_at) : ''}`,
+      'comment-meta'
+    ));
+
+    item.appendChild(textElement('p', comment.content));
+    commentsBox.appendChild(item);
+  }
+}
+
+/* Отправка комментария */
+async function addComment(storyId, form, statusBox, commentsBox, user) {
+  const nameInput = form.elements.namedItem('author_name');
+  const contentInput = form.elements.namedItem('content');
+  const authorName = nameInput.value.trim();
+  const content = contentInput.value.trim();
+
+  if (authorName.length < 2 || authorName.length > 60) {
+    statusBox.textContent = 'Укажи имя или псевдоним длиной от 2 до 60 символов.';
+    return;
+  }
+
+  if (content.length < 1 || content.length > 3000) {
+    statusBox.textContent = 'Комментарий должен содержать от 1 до 3000 символов.';
+    return;
+  }
+
+  const submit = form.querySelector('button[type="submit"]');
+  submit.disabled = true;
+  statusBox.textContent = 'Отправляем комментарий…';
+
+  try {
+    const { error } = await supabase.from('story_comments').insert({
+      story_id: storyId,
+      user_id: user.id,
+      author_name: authorName,
+      content
+    });
+
+    if (error) {
+      statusBox.textContent =
+        'Не удалось отправить комментарий. Проверьте SQL-политики таблицы story_comments.';
+      console.error('Comment insert error:', error);
+      return;
+    }
+
+    contentInput.value = '';
+    statusBox.textContent = 'Комментарий добавлен.';
+    await loadComments(storyId, commentsBox, statusBox);
+  } catch (error) {
+    statusBox.textContent = 'Ошибка при отправке комментария. Попробуй ещё раз.';
+    console.error('Comment submission error:', error);
+  } finally {
+    submit.disabled = false;
+  }
+}
+
+/* Создание блока комментариев */
+async function createCommentsSection(story, user) {
+  const section = document.createElement('section');
+  section.className = 'comments';
+  section.appendChild(textElement('h4', 'Комментарии'));
+
+  const commentsBox = document.createElement('div');
+  commentsBox.className = 'comment-list';
+
+  const statusBox = document.createElement('p');
+  statusBox.className = 'comment-status';
+
+  section.append(commentsBox, statusBox);
+
+  if (user) {
+    const form = document.createElement('form');
+    form.className = 'comment-form';
+
+    const safeId = String(story.id).replace(/[^a-zA-Z0-9_-]/g, '');
+
+    form.innerHTML = `
+      <label for="comment-name-${safeId}">Имя или псевдоним</label>
+      <input id="comment-name-${safeId}" name="author_name"
+        maxlength="60" minlength="2" required>
+      <label for="comment-text-${safeId}">Твой комментарий</label>
+      <textarea id="comment-text-${safeId}" name="content"
+        maxlength="3000" required
+        placeholder="Напиши, что думаешь об этой истории…"></textarea>
+      <button class="comment-submit" type="submit">Отправить комментарий</button>
+    `;
+
+    form.elements.namedItem('author_name').value =
+      user.user_metadata?.display_name ||
+      user.user_metadata?.full_name ||
+      '';
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      await addComment(story.id, form, statusBox, commentsBox, user);
+    });
+
+    section.appendChild(form);
+  } else {
+    const note = document.createElement('p');
+    note.className = 'comment-login-note';
+    note.append('Чтобы оставить комментарий, ');
+
+    const link = document.createElement('a');
+    link.href = 'stories.html';
+    link.textContent = 'войдите или зарегистрируйтесь';
+
+    note.append(link, '.');
+    section.appendChild(note);
+  }
+
+  await loadComments(story.id, commentsBox, statusBox);
+  return section;
+}
+
+/* Загрузка количества лайков и лайков текущего пользователя */
+async function loadStoryLikes(stories, user) {
+  storyLikeCounts = new Map();
+  userLikedStoryIds = new Set();
+
+  const ids = stories.map(story => story.id).filter(Boolean);
+  if (!ids.length) return;
+
+  const { data, error } = await supabase
+    .from('story_likes')
+    .select('story_id,user_id')
+    .in('story_id', ids);
+
+  if (error) {
+    console.error('Like loading error:', error);
+    return;
+  }
+
+  for (const like of data || []) {
+    storyLikeCounts.set(
+      like.story_id,
+      (storyLikeCounts.get(like.story_id) || 0) + 1
+    );
+    if (user && like.user_id === user.id) {
+      userLikedStoryIds.add(like.story_id);
+    }
+  }
+}
+
+/* Блок лайков одной истории */
+function createLikesSection(story, user) {
+  const section = document.createElement('section');
+  section.className = 'story-likes';
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'story-like-button';
+
+  const count = document.createElement('span');
+  count.className = 'story-like-count';
+
+  const note = document.createElement('span');
+  note.className = 'story-like-note';
+
+  let liked = userLikedStoryIds.has(story.id);
+  let total = storyLikeCounts.get(story.id) || 0;
+
+  function update() {
+    button.textContent = liked ? '♥ Вам нравится' : '♡ Нравится';
+    button.setAttribute('aria-pressed', String(liked));
+    count.textContent = `♥ ${total}`;
+  }
+
+  if (!user) {
+    button.addEventListener('click', () => {
+      note.textContent = 'Чтобы поставить лайк, войдите или зарегистрируйтесь.';
+    });
+    note.textContent = 'Лайкать могут зарегистрированные читатели.';
+    const link = document.createElement('a');
+    link.href = 'stories.html';
+    link.textContent = 'Войти / зарегистрироваться';
+    link.style.color = '#f0d6ac';
+    section.append(button, count, note, link);
+    update();
+    return section;
+  }
+
+  button.addEventListener('click', async () => {
+    if (button.disabled) return;
+    button.disabled = true;
+    note.textContent = '';
+
+    try {
+      if (liked) {
+        const { error } = await supabase
+          .from('story_likes')
+          .delete()
+          .eq('story_id', story.id)
+          .eq('user_id', user.id);
+
+        if (error) throw error;
+        liked = false;
+        total = Math.max(0, total - 1);
+        userLikedStoryIds.delete(story.id);
+      } else {
+        const { error } = await supabase
+          .from('story_likes')
+          .insert({ story_id: story.id, user_id: user.id });
+
+        if (error && error.code !== '23505') throw error;
+        if (!error) {
+          liked = true;
+          total += 1;
+          userLikedStoryIds.add(story.id);
+        } else {
+          liked = true;
+          userLikedStoryIds.add(story.id);
+        }
+      }
+
+      storyLikeCounts.set(story.id, total);
+      update();
+    } catch (error) {
+      console.error('Like update error:', error);
+      note.textContent = 'Не удалось изменить лайк. Проверьте таблицу story_likes и её политики в Supabase.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  section.append(button, count, note);
+  update();
+  return section;
+}
+
+function makeStoryThumbPlaceholder() {
+  const placeholder = document.createElement('span');
+  placeholder.className = 'story-thumb-placeholder';
+  placeholder.setAttribute('aria-hidden', 'true');
+  placeholder.textContent = '✦';
+  return placeholder;
+}
+
+/* Создание карточки одной истории */
+async function createStoryCard(story, user) {
+  const details = document.createElement('details');
+  details.className = 'reader-story';
+
+  const summary = document.createElement('summary');
+  summary.className = 'story-summary';
+
+  /* Миниатюра видна и в закрытой карточке, если у истории есть изображение. */
+  if (story.image_url) {
+    const thumb = document.createElement('img');
+    thumb.className = 'story-thumb';
+    thumb.src = story.image_url;
+    thumb.alt = '';
+    thumb.loading = 'lazy';
+    thumb.addEventListener('error', () => { thumb.replaceWith(makeStoryThumbPlaceholder()); });
+    summary.appendChild(thumb);
+  } else {
+    summary.appendChild(makeStoryThumbPlaceholder());
+  }
+
+  const summaryCopy = document.createElement('span');
+  summaryCopy.className = 'story-summary-copy';
+  summaryCopy.appendChild(textElement(
+    'span', story.category || 'История читателя', 'story-category'
+  ));
+  const titleHeading = document.createElement('h3');
+  const titleLink = document.createElement('a');
+  titleLink.textContent = story.title || 'Без названия';
+  titleLink.href = `/.netlify/functions/content-page?type=story&slug=${encodeURIComponent(story.slug || ('story-' + String(story.id).slice(0, 8)))}`;
+  titleLink.target = '_blank';
+  titleLink.rel = 'noopener';
+  titleLink.title = 'Открыть историю на отдельной странице в новой вкладке';
+  titleLink.style.color = 'inherit';
+  titleLink.style.textDecoration = 'underline';
+  titleLink.addEventListener('click', event => event.stopPropagation());
+  titleHeading.appendChild(titleLink);
+  summaryCopy.appendChild(titleHeading);
+
+  const date = story.created_at
+    ? new Date(story.created_at).toLocaleDateString('ru-RU')
+    : '';
+  summaryCopy.appendChild(textElement(
+    'p', `Автор: ${story.author_name || 'Аноним'}${date ? ' · ' + date : ''}`, 'story-meta'
+  ));
+
+  // Очищаем текст от HTML тегов для превью
+  const cleanContent = String(story.content || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  const preview = cleanContent.length > 180 ? cleanContent.slice(0, 180).trimEnd() + '…' : cleanContent;
+  if (preview) summaryCopy.appendChild(textElement('p', preview, 'story-preview'));
+  summary.appendChild(summaryCopy);
+
+  const full = document.createElement('div');
+  full.className = 'story-full';
+  full.hidden = true;
+
+  if (story.image_url) {
+    const image = document.createElement('img');
+    image.src = story.image_url;
+    image.alt = 'Иллюстрация к истории: ' +
+      (story.title || 'страшная история');
+    image.className = 'story-image';
+    image.loading = 'lazy';
+
+    image.addEventListener('error', () => {
+      image.hidden = true;
+    });
+
+    full.appendChild(image);
+  }
+
+  const openPage = document.createElement('p');
+  const openLink = document.createElement('a');
+  openLink.href = `/.netlify/functions/content-page?type=story&slug=${encodeURIComponent(story.slug || ('story-' + String(story.id).slice(0, 8)))}`;
+  openLink.target = '_blank'; openLink.rel = 'noopener';
+  openLink.textContent = 'Открыть отдельную страницу истории ↗';
+  openPage.appendChild(openLink);
+  full.appendChild(openPage);
+  
+  // Рендерим контент с поддержкой HTML-тегов
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'story-content';
+  contentDiv.innerHTML = sanitizeHtml(story.content || '');
+  full.appendChild(contentDiv);
+  
+  // Подпись автора
+  const signature = document.createElement('p');
+  signature.textContent = 'Автор: Сергей Тёмный';
+  signature.style.fontWeight = 'bold';
+  signature.style.textAlign = 'right';
+  signature.style.marginTop = '15px';
+  full.appendChild(signature);
+
+  /* Лайки и комментарии для каждой отображаемой истории */
+  full.appendChild(createLikesSection(story, user));
+  full.appendChild(await createCommentsSection(story, user));
+
+  // Блок с донатом
+  const donateContainer = document.createElement('div');
+  donateContainer.className = 'donate-container';
+  donateContainer.innerHTML = `
+    <a href="https://www.privat24.ua/send/kqjtx" class="donate-button" target="_blank" rel="noopener">
+      <span>☕</span> Угостить автора кофе
+    </a>
+  `;
+  full.appendChild(donateContainer);
+  // Конец блока с донатом
+
+  details.addEventListener('toggle', () => {
+    full.hidden = !details.open;
+  });
+
+  details.append(summary, full);
+  return details;
+}
+
+/* Создание кнопок перехода между страницами */
+function renderPagination() {
+  pagination.replaceChildren();
+
+  const totalPages = Math.ceil(filteredStories.length / PAGE_SIZE);
+
+  if (totalPages <= 1) {
+    pagination.hidden = true;
+    return;
+  }
+
+  pagination.hidden = false;
+
+  const previousButton = document.createElement('button');
+  previousButton.type = 'button';
+  previousButton.textContent = '← Назад';
+  previousButton.disabled = currentPage === 1;
+
+  previousButton.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderPage();
+    }
+  });
+
+  pagination.appendChild(previousButton);
+
+  let pageNumbers = [];
+
+  if (totalPages <= 7) {
+    pageNumbers = Array.from(
+      { length: totalPages },
+      (_, index) => index + 1
+    );
+  } else {
+    pageNumbers = [1];
+
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(totalPages - 1, currentPage + 1);
+
+    if (start > 2) pageNumbers.push('…');
+
+    for (let page = start; page <= end; page++) {
+      pageNumbers.push(page);
+    }
+
+    if (end < totalPages - 1) pageNumbers.push('…');
+
+    pageNumbers.push(totalPages);
+  }
+
+  for (const page of pageNumbers) {
+    if (page === '…') {
+      const dots = document.createElement('span');
+      dots.textContent = '…';
+      dots.setAttribute('aria-hidden', 'true');
+      pagination.appendChild(dots);
+      continue;
+    }
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = String(page);
+
+    if (page === currentPage) {
+      button.className = 'active';
+      button.setAttribute('aria-current', 'page');
+    }
+
+    button.setAttribute('aria-label', `Страница ${page}`);
+
+    button.addEventListener('click', () => {
+      if (currentPage !== page) {
+        currentPage = page;
+        renderPage();
+      }
+    });
+
+    pagination.appendChild(button);
+  }
+
+  const nextButton = document.createElement('button');
+  nextButton.type = 'button';
+  nextButton.textContent = 'Вперёд →';
+  nextButton.disabled = currentPage === totalPages;
+
+  nextButton.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderPage();
+    }
+  });
+
+  pagination.appendChild(nextButton);
+
+  const info = document.createElement('div');
+  info.className = 'pagination-info';
+  info.textContent =
+    `Страница ${currentPage} из ${totalPages} · Найдено историй: ${filteredStories.length}`;
+
+  pagination.appendChild(info);
+}
+
+/* Отрисовка только десяти историй текущей страницы */
+async function renderPage() {
+  const thisRender = ++renderVersion;
+  list.replaceChildren();
+  pagination.hidden = true;
+
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const pageStories = filteredStories.slice(
+    startIndex,
+    startIndex + PAGE_SIZE
+  );
+
+  try {
+    for (const story of pageStories) {
+      const card = await createStoryCard(story, currentUser);
+      if (thisRender !== renderVersion) return;
+      list.appendChild(card);
+    }
+
+    if (thisRender !== renderVersion) return;
+    renderPagination();
+  } catch (error) {
+    if (thisRender !== renderVersion) return;
+    console.error('Page rendering error:', error);
+    message.hidden = false;
+    message.textContent =
+      'Не удалось отобразить истории. Обнови страницу и попробуй ещё раз.';
+  }
+}
+
+/* Первичная загрузка историй из Supabase */
+async function loadStories() {
+  list.replaceChildren();
+  pagination.hidden = true;
+  message.hidden = false;
+  message.textContent = 'Загружаем истории архива…';
+
+  try {
+    const [
+      { data, error },
+      { data: sessionData, error: sessionError }
+    ] = await Promise.all([
+      supabase
+        .from('stories')
+        .select('id,title,author_name,category,content,created_at,image_url,slug,tags,meta_description')
+        .eq('status', 'approved')
+        .order('created_at', { ascending: false }),
+
+      supabase.auth.getSession()
+    ]);
+
+    if (error) {
+      message.textContent =
+        'Не удалось загрузить истории. Проверьте подключение и права доступа в Supabase.';
+      console.error('Story loading error:', error);
+      return;
+    }
+
+    if (sessionError) {
+      console.error('Session loading error:', sessionError);
+    }
+
+    const seenIds = new Set();
+    allStories = [];
+
+    for (const story of data || []) {
+      if (!seenIds.has(story.id)) {
+        seenIds.add(story.id);
+        allStories.push(story);
+      }
+    }
+
+    featuredStories = allStories.slice(0, 5);
+    featuredIndex = 0;
+    renderFeatured();
+    currentUser = sessionData?.session?.user || null;
+    await loadStoryLikes(allStories, currentUser);
+    currentPage = 1;
+    filteredStories = allStories;
+
+    if (allStories.length === 0) {
+      message.textContent =
+        'Пока нет опубликованных историй. Отправь свою историю — после одобрения она появится здесь.';
+      return;
+    }
+
+    message.hidden = true;
+    await renderPage();
+  } catch (error) {
+    console.error('Unexpected loading error:', error);
+    message.hidden = false;
+    message.textContent =
+      'Не удалось загрузить истории. Проверь подключение к интернету и обнови страницу.';
+  }
+}
+
+if (searchInput) {
+  searchInput.addEventListener('input', applySearch);
+}
+
+if (clearSearchButton && searchInput) {
+  clearSearchButton.addEventListener('click', () => {
+    searchInput.value = '';
+    applySearch();
+    searchInput.focus();
+  });
+}
+
+loadStories();
+</script>
+</body>
+</html>

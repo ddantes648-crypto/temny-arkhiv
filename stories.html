@@ -1,0 +1,1549 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7063045413487849" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d0c0e">
+<meta name="robots" content="index,follow">
+<meta name="description" content="Отправьте свою страшную историю в Тёмный архив.">
+<title>Прислать историю — Тёмный архив</title>
+<link rel="stylesheet" href="index.css">
+
+<style>
+.community {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 0 60px;
+}
+
+.panel {
+  background: var(--panel, #211d18);
+  border: 1px solid var(--line, #504235);
+  padding: clamp(16px, 3vw, 28px);
+  margin: 18px 0;
+}
+
+.panel h2 {
+  margin-top: 0;
+  font-weight: normal;
+  color: var(--paper, #e8dcc2);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  color: var(--muted, #b8aa94);
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: var(--text, #f1e8d8);
+  background: #15120f;
+  border: 1px solid var(--line, #504235);
+  padding: 11px;
+  width: 100%;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+textarea {
+  min-height: 230px;
+  resize: vertical;
+}
+
+button {
+  font: inherit;
+  background: #8c2929;
+  color: #fff0e5;
+  border: 1px solid #b15b4c;
+  padding: 10px 16px;
+  cursor: pointer;
+  margin: 5px 5px 5px 0;
+}
+
+button.secondary {
+  background: transparent;
+  border-color: var(--line, #504235);
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.hint,
+.status {
+  color: var(--muted, #b8aa94);
+  font-size: .92rem;
+}
+
+.notice {
+  padding: 12px;
+  border: 1px solid var(--line, #504235);
+  margin: 12px 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.story-image {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  max-height: 620px;
+  height: auto;
+  object-fit: contain;
+  margin: 20px auto;
+  border-radius: 4px;
+}
+
+.moderation-preview {
+  display: block;
+  max-width: min(100%, 500px);
+  max-height: 360px;
+  object-fit: contain;
+  margin: 12px 0;
+  border: 1px solid var(--line, #504235);
+  border-radius: 3px;
+}
+
+/* === Сворачиваемые блоки историй === */
+
+.story-block {
+  border: 1px solid var(--line, #504235);
+  background: var(--panel, #211d18);
+  margin: 12px 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.story-block > summary {
+  display: flex;
+  cursor: pointer;
+  list-style: none;
+  padding: 14px 16px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.story-block > summary::-webkit-details-marker {
+  display: none;
+}
+
+.story-block > summary::after {
+  content: "＋";
+  color: #f0d6ac;
+  font-size: 22px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.story-block[open] > summary::after {
+  content: "−";
+}
+
+.story-block > summary:hover {
+  background: #2b211c;
+}
+
+.story-block__summary-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.story-block__title {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: bold;
+  color: var(--paper, #e8dcc2);
+  overflow-wrap: anywhere;
+}
+
+.story-block__meta {
+  display: block;
+  margin-top: 4px;
+  font-size: .86rem;
+  line-height: 1.45;
+  color: var(--muted, #b8aa94);
+  overflow-wrap: anywhere;
+}
+
+.story-block__body {
+  padding: 14px 16px 18px;
+  border-top: 1px solid var(--line, #504235);
+}
+
+/* Управление видимостью через атрибут open */
+.story-block:not([open]) > .story-block__body {
+  display: none !important;
+}
+
+.story-block[open] > .story-block__body {
+  display: block !important;
+}
+
+.story-block__text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.7;
+  max-height: 55vh;
+  overflow-y: auto;
+  padding: 14px;
+  margin: 14px 0 0;
+  background: #15120f;
+  border: 1px solid var(--line, #504235);
+  border-radius: 3px;
+}
+
+/* Стили для заголовков и списков внутри текста истории */
+.story-block__text h2 { font-size: 1.5rem; margin-top: 1.5em; margin-bottom: 0.5em; color: var(--paper, #e8dcc2); border-bottom: 1px solid var(--line, #504235); padding-bottom: 0.2em; }
+.story-block__text h3 { font-size: 1.25rem; margin-top: 1.2em; margin-bottom: 0.5em; color: var(--paper, #e8dcc2); }
+.story-block__text p { margin: 0 0 1em; }
+.story-block__text ul, .story-block__text ol { margin: 0 0 1em 1.5em; padding: 0; }
+.story-block__text li { margin-bottom: 0.3em; }
+.story-block__text blockquote { margin: 1em 0; padding: 0.5em 1em; border-left: 3px solid #b15b4c; background: #211d18; color: #d3c8c7; font-style: italic; }
+
+.story-block__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.story-block__upload {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0;
+  padding: 12px;
+  border: 1px dashed var(--line, #504235);
+}
+
+.story-block__upload input[type="file"] {
+  max-width: 100%;
+}
+
+.moderation-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.moderation-pagination button {
+  min-width: 44px;
+}
+
+.moderation-pagination button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field.full {
+    grid-column: auto;
+  }
+
+  .community {
+    padding-top: 18px;
+  }
+
+  .story-block > summary { padding: 12px; }
+  .story-block__body    { padding: 0 12px 14px; }
+  .story-block__text    { max-height: 60vh; }
+}
+</style>
+
+<style>
+.admin-shortcuts{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 24px;padding:12px;position:sticky;top:64px;z-index:5;background:rgba(17,13,16,.96);border:1px solid var(--line);box-shadow:0 8px 24px #0005}
+.admin-shortcuts a{display:inline-block;padding:9px 12px;background:#24191e;border:1px solid #63313a;border-radius:3px;text-decoration:none;color:var(--paper)}
+.admin-shortcuts a:hover{background:#472027;color:#fff}
+#adminArticlesPanel,#adminVideosPanel,#adminModerationPanel,#siteStatsPanel{scroll-margin-top:125px}
+#adminModerationPanel{margin-top:22px}
+#adminModerationPanel .toolbar h2{margin:0}
+@media(max-width:640px){.admin-shortcuts{top:0}.admin-shortcuts a{flex:1 1 42%;text-align:center}}
+</style>
+
+</head>
+
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="kicker">Архив необъяснимого · истории читателей</div>
+    <div class="brand-lockup">
+      <img class="brand-mark" src="favicon.png" alt="" width="72" height="72">
+      <div>
+        <h1>ТЁМНЫЙ АРХИВ</h1>
+      </div>
+    </div>
+    <p class="tagline">Истории, которые трудно объяснить. События, которые невозможно забыть.</p>
+  </div>
+</header>
+
+<nav class="site-nav" aria-label="Основная навигация">
+  <div class="wrap nav-inner">
+    <a href="index.html">Архив историй</a>
+    <a href="stories.html" aria-current="page">Прислать историю</a>
+    <a href="forum.html">Форум</a>
+    <a href="articles.html">Авторские статьи</a>
+    <a href="videos.html">Видео</a>
+    <a href="about.html">О проекте</a>
+    <a href="rules.html">Правила</a>
+    <a href="privacy.html">Конфиденциальность</a>
+    <a href="contact.html">Контакты</a>
+    </div>
+</nav>
+
+<main class="wrap community">
+
+<section class="intro">
+  <h2>Твоя история может попасть в архив</h2>
+  <p>
+    Зарегистрируйся, отправь рассказ и дождись проверки редактором.
+    До одобрения история видна только тебе и модератору.
+    Публикуются только одобренные истории.
+  </p>
+</section>
+
+<div id="notice" class="notice" role="status" aria-live="polite">
+  Подключаемся к архиву…
+</div>
+
+<section id="authPanel" class="panel">
+  <h2>Войти или зарегистрироваться</h2>
+
+  <div class="form-grid">
+    <div class="field">
+      <label for="email">Электронная почта</label>
+      <input
+        id="email"
+        type="email"
+        autocomplete="email"
+        required
+        maxlength="254"
+      >
+    </div>
+
+    <div class="field">
+      <label for="password">Пароль (не менее 8 символов)</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        minlength="8"
+        required
+      >
+    </div>
+  </div>
+
+  <p>
+    <button id="signupBtn" type="button">Зарегистрироваться</button>
+    <button id="loginBtn" class="secondary" type="button">Войти</button>
+  </p>
+
+  <p class="hint">
+    Если подтверждение email включено в Supabase, проверь почту после регистрации.
+  </p>
+</section>
+
+<section id="accountPanel" class="panel hidden">
+  <h2>Твой аккаунт</h2>
+  <p id="userLine"></p>
+  <button id="logoutBtn" class="secondary" type="button">Выйти</button>
+</section>
+
+<section id="submitPanel" class="panel hidden">
+  <h2>Отправить страшную историю</h2>
+
+  <form id="storyForm">
+    <div class="form-grid">
+
+      <div class="field">
+        <label for="storyTitle">Название</label>
+        <input
+          id="storyTitle"
+          required
+          minlength="5"
+          maxlength="140"
+          placeholder="Например, Шаги на чердаке"
+        >
+      </div>
+
+      <div class="field">
+        <label for="authorName">Имя автора или псевдоним</label>
+        <input
+          id="authorName"
+          required
+          minlength="2"
+          maxlength="60"
+          placeholder="Как подписать историю"
+        >
+      </div>
+
+      <div class="field full">
+        <label for="category">Категория</label>
+        <select id="category">
+          <option>Страшные истории</option>
+          <option>Мистика и призраки</option>
+          <option>Славянские легенды</option>
+          <option>Реальные жуткие случаи</option>
+          <option>Космический ужас</option>
+          <option>Другое</option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <label for="storyImageFile">Иллюстрация к истории (необязательно)</label>
+        <input id="storyImageFile" type="file" accept="image/png,image/jpeg,image/webp">
+        <span class="hint">PNG, JPG или WebP, до 8 МБ. Картинка будет прикреплена к истории при отправке на модерацию.</span>
+      </div>
+
+      <div class="field full">
+        <label for="storyContent">Текст истории (100–20 000 символов)</label>
+        <textarea
+          id="storyContent"
+          required
+          minlength="100"
+          maxlength="20000"
+          placeholder="Расскажи, что произошло..."
+        ></textarea>
+        <span id="charCount" class="hint">0 / 20 000</span>
+        <span class="hint">Вы можете использовать HTML-теги для оформления: &lt;h2&gt;Заголовок&lt;/h2&gt;, &lt;p&gt;Абзац&lt;/p&gt;, &lt;b&gt;жирный&lt;/b&gt;, &lt;i&gt;курсив&lt;/i&gt;.</span>
+      </div>
+
+    </div>
+
+    <p class="hint">
+      Отправляя текст, подтверди, что имеешь право его публиковать
+      и не раскрываешь чужие личные данные.
+    </p>
+
+    <button id="sendBtn" type="submit">Отправить на модерацию</button>
+  </form>
+</section>
+
+<section id="myStoriesPanel" class="panel hidden">
+  <h2>Мои истории</h2>
+  <div id="myStories"></div>
+</section>
+
+<section id="moderationPanel" class="panel hidden">
+  <h2>Панель администратора</h2>
+
+  <p class="hint">
+    Этот раздел доступен только аккаунтам, которым владелец сайта
+    выдал права модератора через SQL.
+  </p>
+  <nav class="admin-shortcuts" aria-label="Быстрые переходы администратора">
+    <a href="#siteStatsPanel">📊 Статистика</a>
+    <a href="#adminArticlesPanel">📰 Авторские статьи</a>
+    <a href="#storySeoAdminPanel">🔎 SEO историй</a>
+    <a href="#adminVideosPanel">▶ Видео</a>
+    <a href="#adminModerationPanel">🛡️ Модерация историй</a>
+  </nav>
+
+  <section id="siteStatsPanel" class="panel">
+    <h2>Статистика посещений сайта</h2>
+
+    <p class="hint">
+      Считаются просмотры страниц index.html и stories.html.
+      Повторные открытия и обновления страницы тоже считаются посещениями.
+    </p>
+
+    <div id="siteStats" class="notice" role="status" aria-live="polite">
+      Загружаем статистику…
+    </div>
+
+    <button id="refreshSiteStats" type="button">
+      Обновить статистику
+    </button>
+  </section>
+
+  <section id="storySeoAdminPanel" class="panel archive-admin-panel">
+    <h2>SEO-описание и ключевые слова историй</h2>
+    <p class="hint">Выбери историю, затем заполни описание для поисковиков и ключевые слова через запятую. Это не меняет текст истории и её статус публикации.</p>
+    <div class="form-grid">
+      <div class="field full"><label for="storySeoSelect">История</label><select id="storySeoSelect"><option value="">Загружаем истории…</option></select></div>
+      <div class="field full"><label for="storySeoTags">Ключевые слова / SEO-теги (через запятую)</label><input id="storySeoTags" maxlength="500" placeholder="страшная история, мистический случай, свидетельство очевидца"></div>
+      <div class="field full"><label for="storySeoDescription">SEO-описание для Google</label><textarea id="storySeoDescription" maxlength="300" rows="3" placeholder="Кратко и уникально опиши содержание истории (до 300 символов)"></textarea></div>
+      <div class="field full"><button id="storySeoSave" type="button">Сохранить SEO-поля истории</button><p id="storySeoStatus" class="hint" role="status" aria-live="polite"></p><p id="storySeoDirectLink" class="hint"></p></div>
+    </div>
+  </section>
+
+  <section id="adminArticlesPanel" class="panel archive-admin-panel">
+    <h2>Редактор авторских статей</h2>
+    <p class="hint">Добавляй статьи с заголовком, текстом и ссылкой на иллюстрацию. Картинки хранятся на внешнем хостинге по ссылке, а не загружаются в Netlify.</p>
+    <form id="archiveArticleForm" class="form-grid">
+      <input type="hidden" id="archiveArticleId">
+      <div class="field full"><label for="archiveArticleTitle">Заголовок статьи</label><input id="archiveArticleTitle" required maxlength="180"></div>
+      <div class="field"><label for="archiveArticleSource">Источник / дата / примечание</label><input id="archiveArticleSource" maxlength="180" placeholder="Например: Авторская колонка Сергея Тёмного"></div>
+      <div class="field"><label for="archiveArticleImage">Ссылка на изображение (необязательно)</label><input id="archiveArticleImage" type="url" placeholder="https://…"></div>
+      <div class="field"><label for="archiveArticleImageFile">Или загрузить картинку с компьютера</label><input id="archiveArticleImageFile" type="file" accept="image/png,image/jpeg,image/webp"><span class="hint">PNG, JPG или WebP, до 8 МБ.</span></div>
+      <div class="field full">
+        <label for="archiveArticleText">Текст статьи</label>
+        <textarea id="archiveArticleText" required minlength="20" rows="8"></textarea>
+        <span class="hint">Разрешены HTML-теги: &lt;h2&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;b&gt;, &lt;i&gt;, &lt;ul&gt;, &lt;li&gt;.</span>
+      </div>
+      <div class="field full"><label for="archiveArticleTags">SEO-теги статьи (через запятую)</label><input id="archiveArticleTags" maxlength="500" placeholder="мистика, загадочные события, авторская статья"></div>
+      <div class="field full"><label for="archiveArticleDescription">SEO-описание статьи</label><textarea id="archiveArticleDescription" maxlength="300" rows="2" placeholder="Краткое уникальное описание для Google (до 300 символов)"></textarea></div>
+      <div class="field full"><button type="submit">Сохранить статью</button><button type="button" class="secondary" id="archiveArticleCancel">Очистить форму</button><p id="archiveArticleStatus" class="hint" role="status"></p></div>
+    </form>
+    <div id="archiveArticleAdminList"></div>
+  </section>
+  <section id="adminVideosPanel" class="panel archive-admin-panel">
+    <h2>Редактор видео</h2>
+    <p class="hint">Вставляй ссылку YouTube или Vimeo. Видео будет встроено плеером с исходной платформы; файлы видео на сайт не загружаются.</p>
+    <form id="archiveVideoForm" class="form-grid">
+      <input type="hidden" id="archiveVideoId">
+      <div class="field full"><label for="archiveVideoTitle">Название видео</label><input id="archiveVideoTitle" required maxlength="180"></div>
+      <div class="field full"><label for="archiveVideoUrl">Ссылка на видео (YouTube или Vimeo)</label><input id="archiveVideoUrl" type="url" required placeholder="https://www.youtube.com/watch?v=…"></div>
+      <div class="field full"><label for="archiveVideoDescription">Описание (необязательно)</label><textarea id="archiveVideoDescription" rows="3"></textarea></div>
+      <div class="field full"><button type="submit">Сохранить видео</button><button type="button" class="secondary" id="archiveVideoCancel">Очистить форму</button><p id="archiveVideoStatus" class="hint" role="status"></p></div>
+    </form>
+    <div id="archiveVideoAdminList"></div>
+  </section>
+
+  <section id="adminModerationPanel" class="panel admin-moderation-section">
+    <div class="toolbar"><h2>Модерация историй</h2><button type="button" class="secondary" id="adminTopButton">↑ К панели</button></div>
+    <p class="hint">Новые заявки, опубликованные и отклонённые истории собраны в сворачиваемые карточки. На странице показывается до 10 записей.</p>
+    <div id="pendingStories"></div>
+    <div id="pendingPagination" class="moderation-pagination" hidden></div>
+  </section>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <p><strong>ТЁМНЫЙ АРХИВ</strong></p>
+      <p>Мистический литературный архив: авторские рассказы, истории читателей и необъяснимые события.</p>
+      <p class="smallprint">Пользовательские материалы публикуются после модерации. Художественные рассказы могут быть вымышленными.</p>
+      <p>© Тёмный архив</p>
+    </div>
+    <div>
+      <p><strong>Информация</strong></p>
+      <div class="footer-links">
+        <a href="about.html">О проекте</a>
+        <a href="rules.html">Правила публикации</a>
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="contact.html">Контакты</a>
+        <a href="stories.html">Отправить историю</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+import {
+  createClient
+} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL =
+  'https://eohxtowuwsxppejltrbp.supabase.co';
+
+const SUPABASE_PUBLISHABLE_KEY =
+  'sb_publishable_5spYU-MQBUdO1Z_3A9HfMA_y3HpuSEP';
+
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+const $ = id => document.getElementById(id);
+const notice = $('notice');
+
+let currentUser = null;
+
+const statusNames = {
+  pending: 'На модерации',
+  approved: 'Опубликовано',
+  rejected: 'Отклонено'
+};
+
+/* Безопасный рендеринг разрешённых HTML-тегов */
+function sanitizeHtml(html) {
+  if (!html) return '';
+  const allowedTags = ['h2', 'h3', 'h4', 'p', 'br', 'b', 'strong', 'i', 'em', 'u', 'ul', 'ol', 'li', 'blockquote'];
+  
+  let escaped = String(html)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  
+  allowedTags.forEach(tag => {
+    const openRegex = new RegExp(`&lt;${tag}&gt;`, 'gi');
+    const closeRegex = new RegExp(`&lt;/${tag}&gt;`, 'gi');
+    escaped = escaped.replace(openRegex, `<${tag}>`).replace(closeRegex, `</${tag}>`);
+  });
+  
+  escaped = escaped.replace(/&lt;br\s*\/?&gt;/gi, '<br>');
+  
+  return escaped;
+}
+
+/* Статистика посещений */
+
+async function recordPageVisit() {
+  const page = location.pathname.split('/').pop() || 'index.html';
+
+  if (!['index.html', 'stories.html'].includes(page)) {
+    return;
+  }
+
+  const { error } = await supabase
+    .from('site_visits')
+    .insert({ page });
+
+  if (error) {
+    console.error('Не удалось записать посещение:', error);
+  }
+}
+
+recordPageVisit();
+
+function message(text, error = false) {
+  notice.textContent = text;
+  notice.style.borderColor = error
+    ? '#b84b4b'
+    : 'var(--line, #504235)';
+}
+
+function safeText(tag, text, cls) {
+  const el = document.createElement(tag);
+  el.textContent = text ?? '';
+
+  if (cls) {
+    el.className = cls;
+  }
+
+  return el;
+}
+
+/* Сворачиваемый блок истории с полным текстом в рамке со скроллом */
+
+function makeStoryCard(story, moderator = false) {
+  const details = document.createElement('details');
+  details.className = 'story-block';
+  // По умолчанию details закрыт. Атрибут open управляет видимостью через CSS.
+
+  /* ---------- Заголовок (summary) ---------- */
+  const summary = document.createElement('summary');
+
+  const summaryText = document.createElement('span');
+  summaryText.className = 'story-block__summary-text';
+  summaryText.style.flex = '1';
+  summaryText.style.minWidth = '0';
+
+  const titleEl = document.createElement('span');
+  titleEl.className = 'story-block__title';
+  titleEl.textContent = story.title || 'Без названия';
+
+  // Очищаем текст от HTML тегов для превью в свернутом виде
+  const cleanPreview = String(story.content || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  const metaEl = document.createElement('span');
+  metaEl.className = 'story-block__meta';
+
+  const metaParts = [];
+  if (moderator) metaParts.push(story.author_name || 'Автор не указан');
+  metaParts.push(story.category || 'Без категории');
+  metaParts.push(new Date(story.created_at).toLocaleString('ru-RU'));
+  metaParts.push(statusNames[story.status] || story.status);
+  metaParts.push(cleanPreview.slice(0, 100) + (cleanPreview.length > 100 ? '…' : ''));
+  metaEl.textContent = metaParts.join(' · ');
+
+  if (story.image_url) {
+    const thumb = document.createElement('img');
+    thumb.className = 'story-summary-thumb';
+    thumb.src = story.image_url;
+    thumb.alt = '';
+    thumb.loading = 'lazy';
+    summary.append(thumb);
+  }
+  summaryText.append(titleEl, metaEl);
+  summary.append(summaryText);
+  details.append(summary);
+
+  /* ---------- Содержимое ---------- */
+  const body = document.createElement('div');
+  body.className = 'story-block__body';
+  // Убрали body.hidden и обработчик toggle, теперь CSS делает это сам через [open]
+
+  if (moderator && story.user_id) {
+    const idLine = document.createElement('p');
+    idLine.className = 'hint';
+    idLine.textContent =
+      `Автор: ${story.author_name || 'Не указан'} · ID: ${story.user_id}`;
+    body.append(idLine);
+  }
+
+  if (story.image_url) {
+    const img = document.createElement('img');
+    img.src = story.image_url;
+    img.alt = 'Иллюстрация к истории';
+    img.className = moderator ? 'moderation-preview' : 'story-image';
+    img.loading = 'lazy';
+    body.append(img);
+  }
+
+  /* Полный текст истории — в отдельной рамке со скроллом */
+  const textBox = document.createElement('div');
+  textBox.className = 'story-block__text';
+  
+  // Вставляем HTML с поддержкой тегов
+  textBox.innerHTML = sanitizeHtml(story.content || '');
+  
+  // Добавляем подпись автора в конец текста
+  const sig = document.createElement('p');
+  sig.textContent = '\n\nАвтор: Сергей Тёмный';
+  sig.style.fontWeight = 'bold';
+  sig.style.textAlign = 'right';
+  sig.style.marginTop = '15px';
+  textBox.append(sig);
+  
+  body.append(textBox);
+
+  /* ---------- SEO-поля модератора для истории ---------- */
+  if (moderator) {
+    const seoBox = document.createElement('div');
+    seoBox.className = 'story-block__upload';
+    const tagsLabel = document.createElement('label');
+    tagsLabel.textContent = 'SEO-теги (через запятую): ';
+    const tagsInput = document.createElement('input');
+    tagsInput.type = 'text'; tagsInput.maxLength = 500;
+    tagsInput.value = story.tags || '';
+    tagsInput.placeholder = 'упырь, страшная история, мистика';
+    tagsInput.style.width = '100%';
+    const descLabel = document.createElement('label');
+    descLabel.textContent = 'SEO-описание для Google: ';
+    const descInput = document.createElement('textarea');
+    descInput.maxLength = 300; descInput.rows = 2;
+    descInput.value = story.meta_description || '';
+    descInput.placeholder = 'Краткое уникальное описание истории (до 300 символов)';
+    descInput.style.width = '100%';
+    const seoSave = document.createElement('button'); seoSave.type = 'button'; seoSave.textContent = 'Сохранить SEO-поля';
+    const seoStatus = document.createElement('span'); seoStatus.className = 'hint';
+    seoSave.addEventListener('click', async () => {
+      seoSave.disabled = true; seoStatus.textContent = 'Сохраняю…';
+      const tags = tagsInput.value.trim();
+      const meta_description = descInput.value.trim() || String(story.content || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').slice(0, 155);
+      const {error} = await supabase.from('stories').update({tags, meta_description}).eq('id', story.id);
+      seoSave.disabled = false;
+      if (error) { seoStatus.textContent = 'Ошибка сохранения: ' + error.message; return; }
+      story.tags = tags; story.meta_description = meta_description;
+      seoStatus.textContent = 'SEO-поля сохранены.';
+    });
+    seoBox.append(tagsLabel, tagsInput, descLabel, descInput, seoSave, seoStatus);
+    body.append(seoBox);
+  }
+
+  /* ---------- Действия модератора ---------- */
+  if (moderator && story.status === 'pending') {
+    const uploadBox = document.createElement('div');
+    uploadBox.className = 'story-block__upload';
+
+    const label = document.createElement('label');
+    label.textContent = 'Картинка к истории: ';
+    label.htmlFor = `story-image-${story.id}`;
+
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.id = `story-image-${story.id}`;
+    fileInput.accept = 'image/png,image/jpeg,image/webp';
+
+    const uploadBtn = document.createElement('button');
+    uploadBtn.type = 'button';
+    uploadBtn.textContent = story.image_url
+      ? 'Заменить картинку'
+      : 'Загрузить картинку';
+
+    const uploadStatus = document.createElement('span');
+    uploadStatus.className = 'hint';
+    uploadStatus.textContent = story.image_url
+      ? 'Картинка уже добавлена.'
+      : 'Выбери PNG, JPG или WebP.';
+
+    uploadBtn.addEventListener('click', async () => {
+      const file = fileInput.files?.[0];
+      if (!file) {
+        uploadStatus.textContent = 'Сначала выбери изображение.';
+        return;
+      }
+      if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
+        uploadStatus.textContent = 'Разрешены PNG, JPG или WebP.';
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        uploadStatus.textContent = 'Максимальный размер файла — 8 МБ.';
+        return;
+      }
+
+      uploadBtn.disabled = true;
+      uploadStatus.textContent = 'Загружаю изображение…';
+
+      const ext = {
+        'image/png': 'png',
+        'image/jpeg': 'jpg',
+        'image/webp': 'webp'
+      }[file.type];
+      const path = `${story.id}/${Date.now()}.${ext}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('story-images')
+        .upload(path, file, { upsert: true, contentType: file.type });
+
+      if (uploadError) {
+        uploadBtn.disabled = false;
+        uploadStatus.textContent = 'Ошибка загрузки: ' + uploadError.message;
+        return;
+      }
+
+      const { data: publicData } = supabase.storage
+        .from('story-images')
+        .getPublicUrl(path);
+      const imageUrl = publicData.publicUrl;
+
+      const { error: updateError } = await supabase
+        .from('stories')
+        .update({ image_url: imageUrl })
+        .eq('id', story.id);
+
+      if (updateError) {
+        uploadBtn.disabled = false;
+        uploadStatus.textContent = 'Не удалось сохранить ссылку: ' + updateError.message;
+        return;
+      }
+
+      story.image_url = imageUrl;
+      const oldImg = body.querySelector('.moderation-preview');
+      const newImg = document.createElement('img');
+      newImg.src = imageUrl;
+      newImg.alt = 'Иллюстрация к истории';
+      newImg.className = 'moderation-preview';
+      newImg.loading = 'lazy';
+      if (oldImg) oldImg.replaceWith(newImg);
+      else body.insertBefore(newImg, textBox);
+
+      uploadBtn.textContent = 'Заменить картинку';
+      uploadBtn.disabled = false;
+      uploadStatus.textContent = 'Картинка сохранена.';
+      message('Иллюстрация добавлена к истории.');
+    });
+
+    uploadBox.append(label, fileInput, uploadBtn, uploadStatus);
+
+    const actions = document.createElement('div');
+    actions.className = 'story-block__actions';
+
+    const approve = document.createElement('button');
+    approve.type = 'button';
+    approve.textContent = 'Одобрить';
+    approve.addEventListener('click', () => reviewStory(story.id, 'approved'));
+
+    const reject = document.createElement('button');
+    reject.type = 'button';
+    reject.className = 'secondary';
+    reject.textContent = 'Отклонить';
+    reject.addEventListener('click', () => reviewStory(story.id, 'rejected'));
+
+    actions.append(approve, reject);
+    body.append(uploadBox, actions);
+  }
+
+  details.append(body);
+  return details;
+}
+
+/* Истории текущего пользователя */
+
+async function loadMyStories() {
+  const target = $('myStories');
+  target.replaceChildren();
+
+  const { data, error } = await supabase
+    .from('stories')
+    .select(
+      'id,title,category,content,status,created_at,image_url,slug,tags,meta_description'
+    )
+    .eq('user_id', currentUser.id)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    target.append(
+      safeText(
+        'p',
+        'Не удалось загрузить истории: ' + error.message
+      )
+    );
+    return;
+  }
+
+  if (!data.length) {
+    target.append(
+      safeText('p', 'Ты ещё не отправлял истории.')
+    );
+    return;
+  }
+
+  data.forEach(story => {
+    target.append(makeStoryCard(story));
+  });
+}
+
+/* Статистика посещений */
+
+async function loadSiteStats() {
+  const target = $('siteStats');
+
+  if (!target) return;
+
+  target.textContent = 'Загружаем статистику…';
+
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+
+  const [
+    totalResult,
+    todayResult,
+    homeResult,
+    storiesResult
+  ] = await Promise.all([
+    supabase
+      .from('site_visits')
+      .select('id', { count: 'exact', head: true }),
+
+    supabase
+      .from('site_visits')
+      .select('id', { count: 'exact', head: true })
+      .gte('visited_at', startOfToday.toISOString()),
+
+    supabase
+      .from('site_visits')
+      .select('id', { count: 'exact', head: true })
+      .eq('page', 'index.html'),
+
+    supabase
+      .from('site_visits')
+      .select('id', { count: 'exact', head: true })
+      .eq('page', 'stories.html')
+  ]);
+
+  const firstError =
+    totalResult.error ||
+    todayResult.error ||
+    homeResult.error ||
+    storiesResult.error;
+
+  if (firstError) {
+    target.textContent =
+      'Не удалось загрузить статистику. ' +
+      'Проверь, создана ли таблица site_visits и настроены ли разрешения.';
+
+    console.error('Site statistics error:', firstError);
+    return;
+  }
+
+  target.replaceChildren();
+
+  const rows = [
+    ['Всего просмотров страниц', totalResult.count ?? 0],
+    ['Просмотров сегодня', todayResult.count ?? 0],
+    ['Главная страница', homeResult.count ?? 0],
+    ['Страница отправки историй', storiesResult.count ?? 0]
+  ];
+
+  for (const [label, value] of rows) {
+    const row = document.createElement('p');
+    row.style.margin = '8px 0';
+
+    const strong = document.createElement('strong');
+    strong.textContent = Number(value).toLocaleString('ru-RU');
+
+    row.append(
+      strong,
+      document.createTextNode(' — ' + label)
+    );
+
+    target.appendChild(row);
+  }
+}
+
+/* Проверка прав администратора */
+
+async function checkModerator() {
+  const { data, error } = await supabase
+    .from('story_admins')
+    .select('user_id')
+    .eq('user_id', currentUser.id)
+    .maybeSingle();
+
+  if (error || !data) {
+    $('moderationPanel').classList.add('hidden');
+    return;
+  }
+
+  $('moderationPanel').classList.remove('hidden');
+
+  await Promise.all([
+    loadPending(),
+    loadSiteStats()
+  ]);
+}
+
+/* Пагинация: 10 историй на страницу */
+
+const PENDING_PAGE_SIZE = 10;
+
+let pendingStories = [];
+let pendingPage = 0;
+
+function renderPendingPage() {
+  const target = $('pendingStories');
+  const pagination = $('pendingPagination');
+
+  target.replaceChildren();
+  pagination.replaceChildren();
+
+  if (!pendingStories.length) {
+    target.append(
+      safeText('p', 'Историй на проверке нет.')
+    );
+
+    pagination.hidden = true;
+    return;
+  }
+
+  const pageCount = Math.ceil(
+    pendingStories.length / PENDING_PAGE_SIZE
+  );
+
+  pendingPage = Math.max(
+    0,
+    Math.min(pendingPage, pageCount - 1)
+  );
+
+  const start = pendingPage * PENDING_PAGE_SIZE;
+
+  const pageStories = pendingStories.slice(start, start + PENDING_PAGE_SIZE);
+  const statusGroups = [
+    { status: 'pending', title: 'На модерации' },
+    { status: 'approved', title: 'Опубликованные истории' },
+    { status: 'rejected', title: 'Отклонённые истории' }
+  ];
+
+  statusGroups.forEach(group => {
+    const storiesInGroup = pageStories.filter(story => story.status === group.status);
+    if (!storiesInGroup.length) return;
+
+    const heading = document.createElement('h3');
+    heading.textContent = `${group.title} (${storiesInGroup.length})`;
+    heading.style.margin = '20px 0 10px';
+    heading.style.color = 'var(--paper, #e8dcc2)';
+    target.append(heading);
+
+    storiesInGroup.forEach(story => {
+      target.append(makeStoryCard(story, true));
+    });
+  });
+
+  pagination.hidden = pageCount <= 1;
+
+  if (pageCount > 1) {
+    const prev = document.createElement('button');
+    prev.type = 'button';
+    prev.className = 'secondary';
+    prev.textContent = '← Назад';
+    prev.disabled = pendingPage === 0;
+
+    prev.addEventListener('click', () => {
+      if (pendingPage > 0) {
+        pendingPage--;
+        renderPendingPage();
+
+        $('moderationPanel').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+
+    const label = safeText(
+      'span',
+      `Страница ${pendingPage + 1} из ${pageCount} · историй: ${pendingStories.length}`,
+      'status'
+    );
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.className = 'secondary';
+    next.textContent = 'Далее →';
+    next.disabled = pendingPage >= pageCount - 1;
+
+    next.addEventListener('click', () => {
+      if (pendingPage < pageCount - 1) {
+        pendingPage++;
+        renderPendingPage();
+
+        $('moderationPanel').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+
+    pagination.append(prev, label, next);
+  }
+}
+
+/* Загрузка очереди модерации */
+
+async function loadPending() {
+  const target = $('pendingStories');
+
+  target.replaceChildren(
+    safeText('p', 'Загружаем истории…')
+  );
+
+  const { data, error } = await supabase
+    .from('stories')
+    .select(
+      'id,user_id,title,category,author_name,content,status,created_at,image_url,slug,tags,meta_description'
+    )
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    pendingStories = [];
+    $('pendingPagination').hidden = true;
+
+    target.replaceChildren(
+      safeText(
+        'p',
+        'Не удалось загрузить очередь: ' + error.message
+      )
+    );
+
+    return;
+  }
+
+  pendingStories = data || [];
+
+  pendingPage = Math.min(
+    pendingPage,
+    Math.max(
+      0,
+      Math.ceil(pendingStories.length / PENDING_PAGE_SIZE) - 1
+    )
+  );
+
+  renderPendingPage();
+}
+
+/* Одобрение и отклонение */
+
+async function reviewStory(id, status) {
+  const storyForReview = pendingStories.find(item => item.id === id);
+  const reviewUpdate = { status, reviewed_at: new Date().toISOString() };
+  if (status === 'approved' && storyForReview) {
+    reviewUpdate.slug = (storyForReview.slug && !String(storyForReview.slug).startsWith('story-'))
+      ? storyForReview.slug
+      : `${makeSeoSlug(storyForReview.title, 'story')}-${String(id).slice(0, 8)}`;
+    reviewUpdate.meta_description = storyForReview.meta_description || String(storyForReview.content || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').slice(0, 155);
+  }
+  const { error } = await supabase.from('stories').update(reviewUpdate).eq('id', id);
+
+  if (error) {
+    message(
+      'Не удалось изменить статус: ' + error.message,
+      true
+    );
+    return;
+  }
+
+  message(
+    status === 'approved'
+      ? 'История опубликована.'
+      : 'История отклонена.'
+  );
+
+  await loadPending();
+  await loadMyStories();
+}
+
+/* Обновление состояния авторизации */
+
+async function refresh() {
+  const {
+    data: { session },
+    error
+  } = await supabase.auth.getSession();
+
+  if (error) {
+    message(
+      'Ошибка проверки сессии: ' + error.message,
+      true
+    );
+    return;
+  }
+
+  currentUser = session?.user ?? null;
+
+  $('authPanel').classList.toggle(
+    'hidden',
+    !!currentUser
+  );
+
+  $('accountPanel').classList.toggle(
+    'hidden',
+    !currentUser
+  );
+
+  $('submitPanel').classList.toggle(
+    'hidden',
+    !currentUser
+  );
+
+  $('myStoriesPanel').classList.toggle(
+    'hidden',
+    !currentUser
+  );
+
+  if (currentUser) {
+    $('userLine').textContent =
+      'Вход выполнен: ' + currentUser.email;
+
+    message(
+      'Ты вошёл в аккаунт. Можешь отправить историю.'
+    );
+
+    await loadMyStories();
+    await checkModerator();
+
+  } else {
+    $('moderationPanel').classList.add('hidden');
+
+    message(
+      'Зарегистрируйся или войди, чтобы отправить историю.'
+    );
+  }
+}
+
+/* Регистрация */
+
+$('signupBtn').addEventListener('click', async () => {
+  const email = $('email').value.trim();
+  const password = $('password').value;
+
+  if (!email || password.length < 8) {
+    message(
+      'Укажи email и пароль длиной не менее 8 символов.',
+      true
+    );
+    return;
+  }
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      // После подтверждения email возвращаем пользователя на страницу отправки историй.
+      emailRedirectTo: 'https://temny-arkhiv.com.ua/stories.html'
+    }
+  });
+
+  if (error) {
+    message(
+      'Не удалось зарегистрироваться: ' + error.message,
+      true
+    );
+    return;
+  }
+
+  if (data.session) {
+    message('Регистрация успешна. Ты вошёл в аккаунт.');
+    await refresh();
+  } else {
+    message(
+      'Регистрация прошла успешно! Перейди в свою почту, открой письмо от Тёмного архива и нажми ссылку подтверждения. После подтверждения ты вернёшься на эту страницу и сможешь отправить историю.'
+    );
+  }
+});
+
+/* Вход */
+
+$('loginBtn').addEventListener('click', async () => {
+  const { error } = await supabase.auth.signInWithPassword({
+    email: $('email').value.trim(),
+    password: $('password').value
+  });
+
+  if (error) {
+    message(
+      'Не удалось войти: ' + error.message,
+      true
+    );
+    return;
+  }
+
+  await refresh();
+});
+
+/* Выход */
+
+$('logoutBtn').addEventListener('click', async () => {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    message(error.message, true);
+    return;
+  }
+
+  await refresh();
+});
+
+function makeSeoSlug(value, prefix='story') {
+  const map = {'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'kh','ц':'ts','ч':'ch','ш':'sh','щ':'shch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya','і':'i','ї':'yi','є':'ye','ґ':'g'};
+  let slug = String(value || '').toLowerCase().split('').map(ch => map[ch] ?? ch).join('');
+  slug = slug.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 75).replace(/-+$/g, '');
+  return slug || prefix;
+}
+
+
+/* Счётчик символов */
+
+$('storyContent').addEventListener('input', () => {
+  $('charCount').textContent =
+    $('storyContent').value.length + ' / 20 000';
+});
+
+/* Отправка новой истории */
+
+$('storyForm').addEventListener('submit', async event => {
+  event.preventDefault();
+  if (!currentUser) { message('Сначала войди в аккаунт.', true); return; }
+
+  const title = $('storyTitle').value.trim();
+  const author_name = $('authorName').value.trim();
+  const category = $('category').value;
+  const content = $('storyContent').value.trim();
+  const imageFile = $('storyImageFile')?.files?.[0] || null;
+
+  if (title.length < 5 || author_name.length < 2 || content.length < 100) {
+    message('Проверь поля: текст истории должен содержать минимум 100 символов.', true); return;
+  }
+  if (imageFile && !['image/png', 'image/jpeg', 'image/webp'].includes(imageFile.type)) {
+    message('Изображение должно быть PNG, JPG или WebP.', true); return;
+  }
+  if (imageFile && imageFile.size > 8 * 1024 * 1024) {
+    message('Размер изображения не должен превышать 8 МБ.', true); return;
+  }
+
+  const button = $('sendBtn');
+  button.disabled = true;
+  button.textContent = imageFile ? 'Загружаю картинку и отправляю…' : 'Отправляю…';
+  try {
+    let imageUrl = '';
+    if (imageFile) {
+      const ext = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp' }[imageFile.type];
+      const path = `${currentUser.id}/${crypto.randomUUID()}.${ext}`;
+      const { error: uploadError } = await supabase.storage.from('story-images')
+        .upload(path, imageFile, { upsert: false, contentType: imageFile.type });
+      if (uploadError) throw new Error('Не удалось загрузить картинку: ' + uploadError.message + '. Проверь настройку хранилища story-images в Supabase.');
+      imageUrl = supabase.storage.from('story-images').getPublicUrl(path).data.publicUrl;
+    }
+
+    const storyRecord = { user_id: currentUser.id, title, author_name, category, content, status: 'pending' };
+    if (imageUrl) storyRecord.image_url = imageUrl;
+    const { error } = await supabase.from('stories').insert(storyRecord);
+    if (error) throw new Error('Не удалось отправить историю: ' + error.message);
+
+    $('storyForm').reset();
+    $('charCount').textContent = '0 / 20 000';
+    message(imageFile
+      ? 'История с картинкой отправлена на модерацию. Она появится в архиве после одобрения.'
+      : 'История отправлена на модерацию. Она появится в архиве после одобрения.');
+    await loadMyStories();
+  } catch (error) {
+    message(error.message || 'Произошла ошибка при отправке истории.', true);
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Отправить на модерацию';
+  }
+});
+
+/* Смена состояния авторизации */
+
+supabase.auth.onAuthStateChange(() => {
+  setTimeout(() => refresh(), 0);
+});
+
+/* Обновление статистики вручную */
+
+$('refreshSiteStats')?.addEventListener(
+  'click',
+  loadSiteStats
+);
+
+/* Админ-редактор статей и видео */
+function resetEditor(prefix) {
+  const form = $(prefix === 'archiveArticle' ? 'archiveArticleForm' : 'archiveVideoForm');
+  form?.reset();
+  $(`${prefix}Id`).value = '';
+}
+async function adminLoadContent(table, targetId, kind) {
+  const target = $(targetId); if (!target) return;
+  target.replaceChildren();
+  const {data, error} = await supabase.from(table).select('*').order('created_at', {ascending:false});
+  if (error) { target.textContent = 'Не удалось загрузить список. Проверь SQL-настройку: ' + error.message; return; }
+  if (!data?.length) { target.textContent = 'Пока ничего не добавлено.'; return; }
+  data.forEach(item => {
+    const row = document.createElement('div'); row.className = 'archive-admin-row';
+    const title = document.createElement('strong'); title.textContent = item.title;
+    const edit = document.createElement('button'); edit.type='button'; edit.textContent='Изменить';
+    edit.addEventListener('click', () => {
+      if (kind === 'article') {
+        $('archiveArticleId').value=item.id; $('archiveArticleTitle').value=item.title||''; $('archiveArticleSource').value=item.source||''; $('archiveArticleImage').value=item.image_url||''; $('archiveArticleText').value=item.content||''; $('archiveArticleTags').value=item.tags||''; $('archiveArticleDescription').value=item.meta_description||'';
+        $('archiveArticleForm').scrollIntoView({behavior:'smooth',block:'center'});
+      } else {
+        $('archiveVideoId').value=item.id; $('archiveVideoTitle').value=item.title||''; $('archiveVideoUrl').value=item.video_url||''; $('archiveVideoDescription').value=item.description||'';
+        $('archiveVideoForm').scrollIntoView({behavior:'smooth',block:'center'});
+      }
+    });
+    const del = document.createElement('button'); del.type='button'; del.className='secondary'; del.textContent='Удалить';
+    del.addEventListener('click', async () => { if(!confirm(`Удалить «${item.title}»?`)) return; const {error}=await supabase.from(table).delete().eq('id',item.id); if(error){alert('Ошибка удаления: '+error.message);return;} adminLoadContent(table,targetId,kind); });
+    row.append(title, edit, del); target.append(row);
+  });
+}
+async function saveAdminRecord(table, prefix, fields, statusId, listId, kind) {
+  const status=$(statusId); status.textContent='Сохраняю…';
+  const record={}; fields.forEach(([field,id])=>record[field]=$(id).value.trim());
+  if (kind==='video') { const embed=videoEmbed(record.video_url); if(!embed){status.textContent='Вставь корректную ссылку YouTube или Vimeo.';return;} }
+  if (kind==='article') {
+    // URL статьи не меняется при редактировании уже опубликованной записи.
+    if (!$(`${prefix}Id`).value) record.slug = makeSeoSlug(record.title, 'newspaper');
+    record.meta_description = (record.meta_description || String(record.content || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').slice(0, 155)).slice(0, 300);
+  }
+  if (kind==='article') {
+    const file=$('archiveArticleImageFile')?.files?.[0];
+    if(file){
+      if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>8*1024*1024){status.textContent='Изображение должно быть PNG, JPG или WebP размером до 8 МБ.';return;}
+      status.textContent='Загружаю изображение…';
+      const ext={'image/png':'png','image/jpeg':'jpg','image/webp':'webp'}[file.type];
+      const path=`articles/${crypto.randomUUID()}.${ext}`;
+      const {error:uploadError}=await supabase.storage.from('archive-media').upload(path,file,{upsert:false,contentType:file.type});
+      if(uploadError){status.textContent='Ошибка загрузки изображения: '+uploadError.message;return;}
+      record.image_url=supabase.storage.from('archive-media').getPublicUrl(path).data.publicUrl;
+    }
+  }
+  const id=$(`${prefix}Id`).value;
+  let query=id ? supabase.from(table).update(record).eq('id',id) : supabase.from(table).insert(record);
+  let {error}=await query;
+  if (error && kind==='article' && !id && /duplicate|unique/i.test(error.message)) {
+    record.slug = `${record.slug}-${crypto.randomUUID().slice(0,8)}`;
+    ({error}=await supabase.from(table).insert(record));
+  }
+  if(error){status.textContent='Ошибка: '+error.message;return;}
+  status.textContent='Сохранено.'; resetEditor(prefix); await adminLoadContent(table,listId,kind);
+}
+function videoEmbed(url) {
+  try { const u=new URL(url); let id='';
+    if (['youtube.com','www.youtube.com','m.youtube.com'].includes(u.hostname)) { id=u.searchParams.get('v')||u.pathname.match(/\/(?:embed|shorts)\/([\w-]+)/)?.[1]||''; if(id) return `https://www.youtube-nocookie.com/embed/${id}`; }
+    if(u.hostname==='youtu.be') { id=u.pathname.slice(1); if(id) return `https://www.youtube-nocookie.com/embed/${id}`; }
+    if(['vimeo.com','www.vimeo.com','player.vimeo.com'].includes(u.hostname)) { id=u.pathname.split('/').filter(Boolean).pop(); if(/^\d+$/.test(id||'')) return `https://player.vimeo.com/video/${id}`; }
+  } catch(e){} return '';
+}
+$('archiveArticleForm')?.addEventListener('submit', e=>{e.preventDefault();saveAdminRecord('archive_articles','archiveArticle',[['title','archiveArticleTitle'],['source','archiveArticleSource'],['image_url','archiveArticleImage'],['content','archiveArticleText'],['tags','archiveArticleTags'],['meta_description','archiveArticleDescription']],'archiveArticleStatus','archiveArticleAdminList','article')});
+$('archiveVideoForm')?.addEventListener('submit', e=>{e.preventDefault();saveAdminRecord('archive_videos','archiveVideo',[['title','archiveVideoTitle'],['video_url','archiveVideoUrl'],['description','archiveVideoDescription']],'archiveVideoStatus','archiveVideoAdminList','video')});
+$('archiveArticleCancel')?.addEventListener('click',()=>resetEditor('archiveArticle'));
+$('archiveVideoCancel')?.addEventListener('click',()=>resetEditor('archiveVideo'));
+
+const storySeoCache = new Map();
+async function loadStorySeoOptions() {
+  const select = $('storySeoSelect');
+  if (!select) return;
+  select.replaceChildren(new Option('Загружаем истории…', ''));
+  const { data, error } = await supabase.from('stories')
+    .select('id,title,slug,status,tags,meta_description,content')
+    .order('created_at', { ascending: false });
+  if (error) { select.replaceChildren(new Option('Не удалось загрузить истории', '')); $('storySeoStatus').textContent = 'Ошибка: ' + error.message; return; }
+  storySeoCache.clear();
+  select.replaceChildren(new Option('Выбери историю', ''));
+  (data || []).forEach(story => {
+    storySeoCache.set(story.id, story);
+    const statusLabel = story.status === 'approved' ? 'опубликована' : story.status === 'pending' ? 'на модерации' : (story.status || 'без статуса');
+    select.add(new Option(`${story.title || 'Без названия'} — ${statusLabel}`, story.id));
+  });
+}
+$('storySeoSelect')?.addEventListener('change', () => {
+  const story = storySeoCache.get($('storySeoSelect').value);
+  $('storySeoTags').value = story?.tags || '';
+  $('storySeoDescription').value = story?.meta_description || '';
+  $('storySeoStatus').textContent = '';
+  const link = $('storySeoDirectLink');
+  if (story && story.status === 'approved') {
+    const slug = story.slug || ('story-' + String(story.id).slice(0, 8));
+    link.textContent = 'Прямая ссылка: ' + `${location.origin}/.netlify/functions/content-page?type=story&slug=${encodeURIComponent(slug)}`;
+  } else {
+    link.textContent = story ? 'Ссылка для читателей появится после одобрения истории.' : '';
+  }
+});
+$('storySeoSave')?.addEventListener('click', async () => {
+  const id = $('storySeoSelect').value;
+  const story = storySeoCache.get(id);
+  if (!story) { $('storySeoStatus').textContent = 'Сначала выбери историю.'; return; }
+  const button = $('storySeoSave');
+  button.disabled = true;
+  $('storySeoStatus').textContent = 'Сохраняю…';
+  const tags = $('storySeoTags').value.trim();
+  const description = $('storySeoDescription').value.trim() || String(story.content || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').slice(0, 155);
+  const { error } = await supabase.from('stories').update({ tags, meta_description: description }).eq('id', id);
+  button.disabled = false;
+  if (error) { $('storySeoStatus').textContent = 'Ошибка сохранения: ' + error.message; return; }
+  story.tags = tags; story.meta_description = description;
+  $('storySeoStatus').textContent = 'SEO-описание и ключевые слова сохранены.';
+});
+
+const originalCheckModerator = checkModerator;
+checkModerator = async function() { await originalCheckModerator(); if (!$('moderationPanel').classList.contains('hidden')) await Promise.all([adminLoadContent('archive_articles','archiveArticleAdminList','article'),adminLoadContent('archive_videos','archiveVideoAdminList','video'),loadStorySeoOptions()]); };
+
+
+$('adminTopButton')?.addEventListener('click',()=>{$('moderationPanel')?.scrollIntoView({behavior:'smooth',block:'start'});});
+
+/* Запуск */
+
+refresh();
+</script>
+
+</body>
+</html>

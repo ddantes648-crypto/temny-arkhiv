@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7063045413487849" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#efe3c6">
+  <meta name="description" content="Видеоархив Тёмного архива: мистические видео, загадочные события и необъяснимые истории.">
+  <meta name="robots" content="index,follow">
+
+  <title>Видеоархив — Тёмный архив</title>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="index.css">
+
+  
+
+  <style>
+    .video-archive-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+      gap: 24px;
+      margin: 28px 0 50px;
+    }
+
+    .archive-content-card {
+      min-width: 0;
+      padding: 20px;
+      background: rgba(255, 247, 229, 0.76);
+      border: 1px solid #a88c66;
+      box-shadow: 0 3px 10px rgba(50, 31, 16, 0.08);
+      overflow: hidden;
+    }
+
+    .archive-content-card h2 {
+      margin: 0 0 16px;
+      color: #35261c;
+      font-size: 1.45rem;
+      overflow-wrap: anywhere;
+    }
+
+    .archive-content-card p {
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    .archive-video-frame {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      border: 1px solid #8c7458;
+      background: #17120f;
+    }
+
+    .video-status {
+      margin: 28px 0;
+      padding: 20px;
+      border: 1px solid #a88c66;
+      background: rgba(255, 247, 229, 0.76);
+      color: #49372a;
+      line-height: 1.7;
+    }
+
+    .video-status[hidden] {
+      display: none;
+    }
+
+    .video-open-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #60351e;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .archive-content-card {
+        padding: 14px;
+      }
+
+      .video-archive-list {
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="masthead">
+    <div class="wrap">
+      <div class="kicker">
+        Архив необъяснимого · коллекция старых материалов
+      </div>
+
+      <div class="brand-lockup">
+        <img
+          class="brand-mark"
+          src="favicon.png"
+          alt=""
+          width="72"
+          height="72"
+        >
+        <div>
+          <h1>ТЁМНЫЙ АРХИВ</h1>
+        </div>
+      </div>
+
+      <p class="tagline">
+        Истории, которые трудно объяснить. События, которые невозможно забыть.
+      </p>
+    </div>
+  </header>
+
+  <nav class="site-nav" aria-label="Основная навигация">
+    <div class="wrap nav-inner">
+      <a href="index.html">Архив историй</a>
+      <a href="stories.html">Прислать историю</a>
+      <a href="forum.html">Форум</a>
+      <a href="articles.html">Авторские статьи</a>
+      <a href="videos.html" aria-current="page">Видео</a>
+      <a href="about.html">О проекте</a>
+      <a href="rules.html">Правила</a>
+      <a href="privacy.html">Конфиденциальность</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="archive-page-intro">
+      <h2>Видеоархив</h2>
+      <p>
+        Мистические видео, загадочные события и необъяснимые истории.
+        Видео с YouTube и Vimeo воспроизводятся через встроенный плеер:
+        файлы не загружаются на наш хостинг.
+      </p>
+    </section>
+
+    <p id="videoStatus" class="video-status" role="status" aria-live="polite">
+      Загружаем видеоархив…
+    </p>
+
+    <section
+      id="contentList"
+      class="video-archive-list"
+      aria-label="Видеоархив"
+    ></section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <p><strong>ТЁМНЫЙ АРХИВ</strong></p>
+        <p>Архив мистики, авторских статей и загадочных историй.</p>
+        <p>© Тёмный архив</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="about.html">О проекте</a>
+        <a href="rules.html">Правила</a>
+        <a href="privacy.html">Конфиденциальность</a>
+        <a href="contact.html">Контакты</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { createClient } from
+      'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    const SUPABASE_URL =
+      'https://eohxtowuwsxppejltrbp.supabase.co';
+
+    const SUPABASE_KEY =
+      'sb_publishable_5spYU-MQBUdO1Z_3A9HfMA_y3HpuSEP';
+
+    const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const target = document.getElementById('contentList');
+    const status = document.getElementById('videoStatus');
+
+    function showStatus(message) {
+      status.textContent = message;
+      status.hidden = false;
+    }
+
+    function hideStatus() {
+      status.hidden = true;
+    }
+
+    function getEmbedUrl(raw) {
+      if (typeof raw !== 'string' || !raw.trim()) {
+        return '';
+      }
+
+      try {
+        const url = new URL(raw.trim());
+        const host = url.hostname.toLowerCase();
+        let id = '';
+
+        // YouTube: youtu.be/ID
+        if (host === 'youtu.be') {
+          id = url.pathname.split('/').filter(Boolean)[0] || '';
+        }
+
+        // YouTube: watch?v=ID, /embed/ID, /shorts/ID, /live/ID
+        else if (
+          [
+            'youtube.com',
+            'www.youtube.com',
+            'm.youtube.com',
+            'youtube-nocookie.com',
+            'www.youtube-nocookie.com'
+          ].includes(host)
+        ) {
+          id =
+            url.searchParams.get('v') ||
+            url.pathname.match(
+              /\/(?:embed|shorts|live)\/([\w-]+)/
+            )?.[1] ||
+            '';
+        }
+
+        if (id && /^[\w-]{6,}$/.test(id)) {
+          return (
+            'https://www.youtube-nocookie.com/embed/' +
+            encodeURIComponent(id)
+          );
+        }
+
+        // Vimeo: vimeo.com/123456789
+        else if (
+          [
+            'vimeo.com',
+            'www.vimeo.com',
+            'player.vimeo.com'
+          ].includes(host)
+        ) {
+          id = url.pathname.split('/').filter(Boolean).pop() || '';
+
+          if (/^\d+$/.test(id)) {
+            return 'https://player.vimeo.com/video/' + id;
+          }
+        }
+      } catch (error) {
+        console.warn('Некорректная ссылка на видео:', error);
+      }
+
+      return '';
+    }
+
+    function createVideoCard(video) {
+      const card = document.createElement('article');
+      card.className = 'archive-content-card';
+
+      const heading = document.createElement('h2');
+      heading.textContent =
+        typeof video.title === 'string' && video.title.trim()
+          ? video.title.trim()
+          : 'Без названия';
+
+      card.appendChild(heading);
+
+      const embedUrl = getEmbedUrl(video.video_url);
+
+      if (embedUrl) {
+        const frame = document.createElement('iframe');
+
+        frame.className = 'archive-video-frame';
+        frame.src = embedUrl;
+        frame.title = heading.textContent;
+        frame.loading = 'lazy';
+        frame.allow =
+          'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        frame.allowFullscreen = true;
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+
+        card.appendChild(frame);
+      } else {
+        const message = document.createElement('p');
+        message.textContent =
+          'Не удалось распознать ссылку. Используй ссылку на видео YouTube или Vimeo.';
+
+        card.appendChild(message);
+
+        // Показываем исходную ссылку, если она безопасна.
+        if (typeof video.video_url === 'string') {
+          try {
+            const url = new URL(video.video_url);
+
+            if (
+              ['https:', 'http:'].includes(url.protocol) &&
+              [
+                'youtube.com',
+                'www.youtube.com',
+                'm.youtube.com',
+                'youtu.be',
+                'vimeo.com',
+                'www.vimeo.com',
+                'player.vimeo.com'
+              ].includes(url.hostname.toLowerCase())
+            ) {
+              const link = document.createElement('a');
+              link.className = 'video-open-link';
+              link.href = url.href;
+              link.target = '_blank';
+              link.rel = 'noopener noreferrer';
+              link.textContent = 'Открыть видео на исходном сайте';
+              card.appendChild(link);
+            }
+          } catch (error) {
+            // Неправильную ссылку не делаем кликабельной.
+          }
+        }
+      }
+
+      if (
+        typeof video.description === 'string' &&
+        video.description.trim()
+      ) {
+        const description = document.createElement('p');
+        description.textContent = video.description.trim();
+        card.appendChild(description);
+      }
+
+      return card;
+    }
+
+    async function loadVideos() {
+      target.replaceChildren();
+      showStatus('Загружаем видеоархив…');
+
+      const { data, error } = await db
+        .from('archive_videos')
+        .select('id, title, video_url, description, created_at')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Ошибка Supabase при загрузке видео:', error);
+
+        showStatus(
+          'Не удалось загрузить видео из базы данных. ' +
+          'Проверь, что таблица archive_videos существует, ' +
+          'а публичный доступ на чтение настроен в Supabase.'
+        );
+
+        return;
+      }
+
+      if (!Array.isArray(data) || data.length === 0) {
+        showStatus(
+          'Видео пока нет. Добавь видео через редактор сайта.'
+        );
+
+        return;
+      }
+
+      const cards = data.map(createVideoCard);
+      target.replaceChildren(...cards);
+      hideStatus();
+    }
+
+    loadVideos().catch(error => {
+      console.error('Ошибка видеоархива:', error);
+
+      showStatus(
+        'Произошла ошибка при загрузке видеоархива. ' +
+        'Открой консоль браузера для подробностей.'
+      );
+    });
+  </script>
+</body>
+</html>
